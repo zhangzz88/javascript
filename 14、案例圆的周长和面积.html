@@ -1,0 +1,49 @@
+<!--
+描述：为什么加parseFloat()&&(与)Number()?
+prompt()收到信息就会同步到变量n的内容框。写''就会显示空字符''，写'12ab'也会显示12ab，写'av'就会显示'av';
+此时的需求就是遇到isNaN数据都报错。
+
+为什么需要必须满足两个函数？
+'12ab'，让它显示NaN，parseFloat('12ab')，可以转换成12，但这不是想要的结果，number('12ab')输出NaN;
+''，Number('')会显示''，而parseFloat('')就会转换成NaN.
+parseFloat和number是互补的关系。
+
+
+正常情况：输出'12ab'    结果'12ab'；
+理想状态：输出'12ab'    结果NAN  这时候就用这两个办法parseFloat('12ab')
+这个时候，'','12ab','ab',等不是纯number类型的统统输出NAN。
+-->
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <div>
+        <p>圆的半径<input type="text" name="" id="r" value="" /></p>
+        <p>圆的周长<input type="text" name="" id="cir" value="" /></p>
+        <p>圆的面积<input type="text" name="" id="area" value="" /></p>
+    </div>
+</body>
+<script>
+    var n = prompt('请输入半径');
+    var nn = parseFloat(n) && Number(n); //注意
+    var r = document.getElementById('r');
+    var cir = document.getElementById('cir');
+    var area = document.getElementById('area');
+    if (!isNaN(nn)) {
+        r.value = nn;
+        cir.value = (2 * Math.PI * nn).toFixed(2);
+        area.value = (Math.PI * nn * nn).toFixed(2);
+    } else {
+        alert('请输入正确的数值')
+    }
+</script>
+
+</html>

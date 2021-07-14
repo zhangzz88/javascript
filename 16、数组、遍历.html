@@ -1,0 +1,474 @@
+<!-- 
+描述：数组
+ 
+ 数组属于对象类型中的内置对象，一个数组可以保存任意类型，比如string number array 对象等，
+ 数组可以分为一维数组、二维数组、三维数组等等，
+ 一维数组：[1,2,3,4,];
+ 二维数组:[[1,2,3],3,4]
+ 
+ 
+ 描述：创建数组两个方法
+ 方法一：
+ new Array()读：额瑞
+ var a= new Array('beijing','shanghai','zhuozhou');
+ var a =new Array(1,2,3);
+ var a =new Array('12',null,true,123);
+ var a =new Array();
+ 
+ 方法二：
+ []创建数组
+ var b=[{'孙悟空':18},{'沙和尚':89}];
+ var b=['beijing','shanghai','zhuozhou'];
+ var b=[];
+ var b=['a', , ,'d'];
+ 第二个是空的，但是索引同样是2，console.log会显示etmpt.
+ 
+ 
+ 
+ 
+
+
+
+
+
+ 
+描述：获取、改变、设置数组长度
+获取                        改变                    设置
+ var a=[1,2,3,,,];          var a=[1,2,3,4,5,];     var a=new Array(3) //empty(3)读：安啼  译：空的
+ alert(a.length)            a.length=3;//1,2,3      var a=[];var a.length=3;
+                                                    和改变数组长度一样。
+ 
+
+描述：增加数组元素      修改数组元素      删除数组元素                     查询访问数组元素
+ var a=[];              var a=[1,2,3];  var a=[1,2,3,4];                var a=['beijing',true,12,'345']
+ a[0]=1;                a[1]=3;         delete a[1];//1,empty,3,4       console.log(a[0]);
+ a[1]=2;                                删除后会变成空。                 console.log(a)
+ a[2]=3;
+
+
+
+EACMscript6新的赋值方式
+[a,b,c]=[1,2,3];
+//
+var a = [1, 2, 3, 4];
+[a, b] = a;
+document.write(a, b)
+  
+ 
+
+ 
+ 
+
+
+
+
+
+ 
+ 
+ 
+描述：数组遍历
+
+
+ 描述：遍历数组元素
+ 遍历数组，依次访问数组中所有元素的操作
+ for...in   遍历的是数组的索引    for(var i in arr){}  这里的i是索引  arr是变量名称
+
+ for...of   遍历的是数组中元素值  for(var i in arr){}	  这里的变量i是每次遍历时对应数组元素的值， arr表示遍历的数组
+
+for循环     for循环直接遍历最常见的，是最靠谱的
+
+
+
+
+forEach()遍历方法 
+是数组的一个方法()，需要一个函数返回值。
+注意！foreach()方法是ie8及以下不支持的。
+
+案例：
+var arr = ['孙悟空', '猪八戒', '沙和尚'];
+arr.forEach(function(a, b, c) {
+    console.log(c)
+});
+如上例，可以讲解什么是回调函数，这里的foreach方法的实现是把一个无名字的函数放在foreach方法中，
+至于执行，让浏览器来决定，函数funciton只管本身要执行的内容，关于执行次数，怎么执行，交给浏览器
+就可以了，这个就是回调函数(让别人来决定执行，我只管放在这里就ok了什么都不用管了)；
+
+
+如上例，foreach遍历的每一次都把arr的实参传递进function，直接在funciton定义形参，实参就自动进到形参了
+这个fucntion()中形参可以定义三个
+第一个参数a:是正在遍历的实参；
+第二个参数b:是正在遍历的索引；
+第三个参数c:是正在遍历的组（这里是arr）arr==c
+        
+        
+
+        
+ 
+ 
+ 数组题目：遍历数组a，输出成导航栏
+ var a=['上海','北京','涿州','青海']
+ document.write('<ul>')
+ for (var b of a){
+ 	document.write('<li>'+b+'</li>')
+ }
+ document.write('</ul>')
+ 依次输出上海北京涿州青海
+
+
+
+
+
+遍历数组题目：输入数组最大值最小值
+for循环遍历
+        var arr = [1, 2, 3, 4, 5];
+        var min = max = arr[0];
+        for (var i = 0; i <= arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i]
+            }
+            if (arr[i] < min) {
+                min = arr[i]
+            }
+        }
+        document.write(max)
+        document.write(min)
+
+for...in循环
+         var a = [[1, 2, 3, 4]];
+        var min = max = a[0];
+        for (var i in a) {
+            if (a[i] > min) {
+                min = a[i]
+            }
+        }
+        document.write(min)
+
+
+
+
+
+
+
+
+
+
+
+数组题目：foreach遍历对象
+var dui = [{
+            name: 'zhanghzao',
+            age: '18',
+            modlie: '1723',
+        }, {
+            name: 'lizhao',
+            age: '19',
+            modlie: '123213'
+        }]
+        dui.forEach(function(item) {
+            document.write(item.name + item.age)
+        })
+
+
+
+
+
+数组题目：遍历数组，把18岁的名字加到新得数组
+for...in方法
+var aa = [{
+            name: '沙悟净',
+            age: 18
+        }, {
+            name: '孙悟空',
+            age: 18
+        }, {
+            name: '白龙马',
+            age: 90
+        }];
+        var bb = [];
+        for (var i in aa) {
+            if (aa[i].age == 18) {
+                bb.push(aa[i].age)
+            }
+        }
+
+forEach方法
+ var aa = [{
+            name: '沙悟净',
+            age: 18
+        }, {
+            name: '孙悟空',
+            age: 18
+        }, {
+            name: '白龙马',
+            age: 90
+        }];
+        var bb = [];
+        aa.forEach(function(item) {
+            if (item.age == 18) {
+                bb.push(item.name);
+            }
+        })
+        console.log(bb)；
+
+
+
+
+
+
+描述：二维数组
+就是数组里面套一个数组
+ var arr = new Array(new Array(1, 2, 3), 4, 5, 6, );
+        var ar = [[1, 2, 3, 4],[5, 6,]];
+        var empty = [[],[]]
+
+如何访问二维数组？
+var a=[[1,2,3],[4,5,6]]
+console.log(a)
+console.log(a[0][1])//输出的是2
+
+案例:二维数组转置
+var arr=[['a','b','c'],['d','e','f'],['g','h','i'],['j','k','l']];
+var res=[];
+for (var i=0;i<arr[0].length;i++){
+	res[i]=[];
+	for(var j=0;j<arr.length;j++){
+	res[i][j]=arr[j][i]
+	}
+}
+console.log(res)
+
+
+
+
+
+
+描述：数组的方法()：
+
+
+
+1、slice()方法          不会影响原数据
+作用：1.截取返回数组中某数据
+
+
+arr=[1,2,3,4]
+var brr=arr.sclie(1);
+1.1 slice(1)方法
+接入索引1及后面所有元素
+
+1.2 slice(1,-1)
+截取索引1(包括1)及到倒数第1(包括倒数1)的数据
+
+1.3 slice(1,2)方法
+截取索引1到2（不包括2）的所有元素
+
+
+
+
+
+
+
+2.2.delete arr[0]也可以删除，但是会留下未定义的空洞。
+
+
+
+
+
+
+2、splice()方法         影响原数组
+作用：1.删除一个范围的元素，然后添加。2.返回一个删除的元素的数组
+三种写法
+arr.splice(1)           arr.splice(1，3)                 arr.splice(1,2,'蜘蛛精','二郎神'...)
+删除索引1及以后数据     删除索引1后面包括本身的3个数据      删除索引1及到后面2个的数据，同时在删除位置前面加数据。
+var brr=arr.splice(1)；
+返回给brr删除的数据
+
+
+
+案例一：splice()方法删除重复的数字
+注意：i=0时要和o=1及以后的比，i=1时要和o=2及以后的比。
+var arr = [1, 2, 3, 2, 1, 3, 4, 2, 5];
+for (var i = 0; i <= arr.length; i++) {
+
+    for (var o = i + 1; o <= arr.length; o++) {
+        if (arr[i] == arr[o]) {
+        arr.splice(o, 1);
+        }
+    }
+}
+console.log(arr)
+
+案例二：splice()方法 删除连续的重复数字
+var arr = [1, 2, 2, 2, 2, 3, 4, 2, 5];
+    for (var i = 0; i <= arr.length; i++) {
+        for (var o = i + 1; o <= arr.length; o++) {
+            if (arr[i] == arr[o]) {
+            arr.splice(o, 1);
+            o--;
+            }
+        }
+}
+console.log(arr)
+
+
+
+
+
+3、concat()方法     不会改变现有数组
+作用：1.合并多个数组2.可以将值作为参数
+
+var arr=[1,2,3]
+var brr=[4,5,6]
+arr.concat(drr)
+将drr数组加到了arr数组的后面，成为一个数组
+
+
+var arr=[1,2,3]
+var crr=[4,5,6]
+arr.concat(drr,crr,12,'123')
+依次将括号中数组和数据添加到arr数组的后面（什么类型的数据都可以）
+
+
+
+
+
+
+
+
+4、join()方法           不会影响原数组
+作用：1.数组转换成字符串2.设置数组元素之间的分割
+不会影响原数组，会输出字符串作为结果返回
+var arr = ['孙悟空', '猪八戒', '沙和尚', '蜘蛛精', '白龙马'];
+var brr = arr.join();
+var crr = arr.join('--');//设置元素和元素之间连接的数据样式
+
+
+
+5、reverse()方法  会影响原数组
+作用：翻转数组（前后互换）
+
+6、pop()方法                会影响原数组
+作用：1.删除最后一个元素2.可以返回被删除的元素
+var arr = ['孙悟空', '猪八戒', '沙和尚', '蜘蛛精', '白龙马'];
+arr.pop();
+var brr=arr.pop()
+
+
+7、push()方法            会影响原数组 
+作用：1.添加在数组尾部2.返回添加的长度
+var arr = ['孙悟空', '猪八戒'];
+arr.push('沙和尚');
+var brr=arr.push('沙和尚')//返回的是长度3
+
+
+8、shift()方法      影响原数组
+作用：1.删除数组首个元素同时,把后面的元素移位到前面的索引2.返回删除的字符串
+a.shift()
+var b = a.shift();
+
+9、unshift()方法    影响原数组
+作用:1.添加在首个元素前面，后面的索引会往后移动。2.返回添加完成后的数组的长度
+a.shift()   //在首部添加元素
+var b = a.shift();//返回添加后的数组长度
+
+
+
+
+
+
+
+
+
+
+
+
+描述：数组排序
+
+用sort()方法排序          影响原数组
+作用：1.用来将数组元素排序2.按照unicode编码进行排序
+var arr = [1,2,3,4];
+arr.sort();
+以上方法可以排序但是遇到例如11放进去就会错乱。
+
+
+
+
+用sort()加回调函数来进行排序，可以自己指定规则
+
+在sort()添加一个函数，
+回调函数需要指定两个形参，
+浏览器会分贝使用数组中的元素作为实参调用回调函数，然后根据返回值决定顺序
+如果返回一个大于0，就换位置
+如果返回一个小于0，就位置不变
+如果返回一个0，认为两个值相等，不换位置
+
+
+var arr=[5,4,234,1,2,3,1];
+arr.sort(function(a,b){
+	// if(a>b){
+	//  return 1
+	// }else if(a<b){
+	//  return -1
+	// }else {
+	//  return 0;
+	// }
+	return b-a;
+});
+	   console.log(arr);
+
+
+
+
+
+
+用for循环排序
+var arr = [1, 24, 5, 2, 23, 5];
+    for (var i = 0; i <= arr.length; i++) {
+        for (var o = i + 1; o <= arr.length; o++) {
+            if (arr[o] > arr[i]) {
+            var temp = arr[i]   //当下面的o赋值给i的时候，i也变成0了，后面就没办法给0赋值了。
+            arr[i] = arr[o];
+            arr[o] = temp;
+            }
+        }
+    }
+    console.log(arr)
+
+
+
+
+
+
+
+
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <script type="text/javascript">
+        var arr = [
+            ['a', 'b', 'c'],
+            ['d', 'e', 'f'],
+            ['g', 'h', 'i'],
+            ['j', 'k', 'l']
+        ];
+        var res = [];
+        for (var i = 0; i < arr[0].length; i++) {
+            res[i] = [];
+            for (var j = 0; j < arr.length; j++) {
+                res[i][j] = arr[j][i]
+            }
+        }
+
+        console.log(res)
+    </script>
+</body>
+
+</html>

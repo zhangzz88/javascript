@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="times">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		var time=document.getElementById('times');
+		timess();
+		setInterval(timess,1000)
+		function timess (){
+			var shijian=new Date();
+			var shengri=new Date(2022,1,11);
+			var tian=Math.floor((shengri-shijian)/1000);
+			var day=Math.floor(tian/60/60/24);
+			var xiaoshi=Math.floor(tian%86400/60/60);
+			var fenzhogn=Math.floor(tian%86400%3600/60);
+			var miao=tian%86400%3600%60
+			time.innerHTML=day+'tian'+xiaoshi+'xiaoshi'+fenzhogn+'fenzhong'+miao+'miao'
+			
+			
+		}
+		
+	</script>
+</html>

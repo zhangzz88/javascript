@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+    var a = 0x10;
+    a = 100; //10进制
+    a = 0x20; //16进制
+    a = 070; //8进制
+    //a=0b1234;2进制谷歌可以运行，有的浏览器不可以的。
+
+    a = '010'; //有的时候前面加0就要注意，有的浏览器可能就解析成8进制！
+    a = parseInt(a, 10); //所以加一个（a,10)可以直接指定是10进制的表现。
+    console.log(a);
+</script>
+
+</html>

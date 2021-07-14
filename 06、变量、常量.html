@@ -1,0 +1,85 @@
+<!--
+描述：变量
+
+
+描述：标识符
+1可以是大小写字母，数字，下划线，&符号组成，如str，ar1，get_name，&a;
+2开头不能是数字
+3区分大小写
+4不能使用关键词，如变量名写成var就不可以
+5尽量见名见其意，驼峰法（userName）下划线发（user_name）帕斯卡法（UserName）
+注意，javascript遵循的是utf-8编码格式，所以起中文名字也可以，但是万万不可
+
+描述：关键字
+如var function class in with null return
+不能瞎起名字，要避开这些名字
+
+
+描述：变量的使用
+描述：声明变量
+变量名字不可以是数字和&开头
+var hits,hot,NEWS,$age;
+可以用逗号来实现一条语句声明多个变量，以上都是空的，是undfined状态。
+
+描述：赋值变量（用逗号运算符间隔变量）
+var a=1
+var a='1',age=12;
+console.log(foname+age);
+
+
+
+描述：var有什么用？
+var n=1；	声明全局变量后赋值；先声明了一个变量n，然后给n赋值1；var n输出n就会是undfined状态；
+n=1;		直接给对象赋值；相当于window.n=1;要是n没有赋值，直接输出n就会报错。因为n没有声明变量。
+
+描述：只写一个var？
+var n=1;
+	n=3;
+	n=11;
+第一行已经声明变量n，后面就不需要再声明，直接赋值就可以了。	
+
+
+
+
+
+
+描述：常量
+const chang=1;
+const u=2*2*2;
+常量一旦赋值后，就不能改变，生命时候必须指定某个值。
+
+
+
+描述：let
+在ECMAscript6中let关键字是声明一个块级作用域的本地/局部变量；
+意思就是只在let命令所在的代码块内有效。
+
+{
+    let a = 1;
+}
+document.write(a);//没有输出
+
+{
+    var a = 1;
+}
+document.write(a)//输出1
+
+		
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<script type="text/javascript">
+    const chang = 1;
+
+    console.log(chang);
+</script>
+
+<body>
+</body>
+
+</html>

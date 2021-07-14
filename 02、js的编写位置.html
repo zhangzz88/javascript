@@ -1,0 +1,51 @@
+<!--
+js编写的位置
+方法一，外链式，推荐，用src引入外部的js文件,一旦引入了外部js文件，
+就不能在当前script写了，写上也没用了，再写一个新的script标签里面写就可以了。
+方法二，内嵌式，内嵌式直接在script里面写入
+方法三，行内式，直接写在标签里面，可以用事件，不推荐，body里面的js很少使用，结构和行为耦合了。
+
+
+jacascript异步加载！
+方法四：script写在body后面，因，无论是内嵌式还是外链式，页面的下载和渲染都会暂停
+，等脚本执行完了才会进行，对于外链式，页面加载脚本文件会阻塞其他资源的下载，因此
+对于不需要提前执行的都放在body底部，减少对整个页面下载的影响。
+
+为了降低js阻塞问题的影响，使用html5两个标签     async读：a森可 译：异步的     defer 读：地佛儿 译：推迟
+async用于异步加载，先下载文件，不阻塞其他代码执行，下载完成后再执行。
+defer用于延时执行，先下载文件，直到网页加载完成后执行。
+
+-->
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	
+	
+	<script type="text/javascript" src="js/外链式文件.js"></script>
+	<script type="text/javascript">alert("我是内嵌式")</script>
+	<script type="text/javascript" src="http://js.test/file.js" async>console.log('我是异步加载')</script>
+	<script type="text/javascript" src="http://js.test/file.js" defer>console.log('我是推迟加载')</script>
+		
+	
+	
+	
+	
+	
+	<body>
+		
+		
+		<button onclick="alert('我是行内式')">我是行内式</button>
+		<a href="javascript:alert('我是行内式');">我是行内式</a>
+		
+		
+	</body>
+	
+	
+	<script type="text/javascript">console.log('我是body底部加载，先下载，行脚本')</script>
+</html>

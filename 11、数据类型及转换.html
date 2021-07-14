@@ -1,0 +1,159 @@
+<!-- 
+描述：数据类型
+1、boolean
+用于逻辑判断，有true和false两个值,数值true是1，false是0
+
+
+2、string(字符串)
+单引号或单引号来表示；两个引号不能直接互相套着用，可以用\转义
+var n='你好\''；用\转义，因为单引号中不能有单引号，双引号里面不能有双引号。
+<\br>等都需要转义！\n标识换行   \t标识tab制表按钮
+
+var b="我说：\"1233\"";
+想要打出\，需要\\来显示，
+var b='\\';
+想要显示一个",可以用\"
+console.log(b);
+
+
+
+
+3、number(数值)
+包括：NAN，+infinity，-infinity，整数，浮点数，正负数。
+注意：这里的NAN是number里面的NAN，全局也有NAN的，只要不是number类型可能都是NAN，如
+string也是NAN，都表示非数字。
+
+什么时候会显示NAN？
+如('1'*'3'),两个字符串乘的时候，会显示NAN
+
+Number.MAX_VALUE*Number.MAX_VALUE(最大值)就是infinity；
+Number.MAX_VALUE*Number.MIN_VALUE(最小值)就是-infinity;
+number最大值：1.7976931348623157e+308" 	e+308表示1.后面308位
+number最小值:5e-324						表示0.后面324位
+
+
+
+4、null(空值)是object类型
+表示对象不存在或无效，它是一个对象
+
+
+5、undefined(未定义)
+表示没有对变量设置值
+null和undefined都不为0
+
+
+6、object(对象)
+
+
+
+
+描述：数据类型两种检测方法
+typeof操作符
+输出null的时候它是一个object，这是js历史遗留问题。
+可检测出string、number、null、undefined、object、NAN
+但是object里面的数组，data，function，检测不出来。
+
+
+prototype:破儿特太波   call：靠
+Object.prototype.toString.call()扩展函数
+比typeof检测更全面，所有类型都可以检测出来。
+var n=[1,2,3];
+docuemnt.write(Object.prototype.toString.call(n);输出object Arrey
+
+
+
+
+
+描述：数据类型转换
+以下所有方法在纯数字转换的时候，‘012’0会自动省略
+isNaN()函数可以检测出数据是否是NAN
+
+描述：数据类型转换成number数值方法
+Number()将string纯数字转换成纯数值；
+Number('123');	//123
+Number('')		//0
+Number('8d')	//NAN
+Number('d4')	//NAN
+Number(null)	//0
+Number(undefined)//NAN
+Number(true)	//1
+Number(false)	//0
+
+读：破儿思in特
+parseInt('a',16)//逗号后面可以指定进制数。
+
+parseInt()将string中数字，字母符号等数值转换成纯数值整数；
+parseInt('12.12')	//12
+parseInt('')		//NAN
+parseInt(12ab)		//12
+parseInt('ab12')	//NAN
+parseInt(null)		//NAN
+parseInt(undefined)	//NAN
+parseInt(true)		//NAN
+parseInt(false)		//NAN
+
+读：破儿思佛漏特
+parseFloat('123.12')//123.12
+parseFloat('')		//NAN
+parseFloat('12.1ab')//12.1	
+parseFloat('ab12.1')//NAN
+parseFloat(null)	//NAN
+parseFloat(undefined)//NAN
+parseFloat(true)	//NAN
+parseFloat(false)	//NAN
+parseFloat()将string中数字，字母符号等数值转换成纯数值浮点数；
+
+
+
+
+描述：将数据转换成boolean
+Boolean()函数方法
+Boolean('121212')//ture
+Boolean(0)		//false
+Boolean(1)		//true 
+Boolean(122)		//true
+Boolean(null)		//false
+Boolean(NAN)		//false
+Boolean(undfined)	//false
+
+
+描述：将数据转换成string
+tostring()方法
+tostring(16)//可以将需要转的数据转换成16进制。
+	a=123;a.toString()//'123'
+	
+	a=true;a.toString()//'true'
+	
+	a=null;a.toString()//报错
+	
+	a=undefined;console.log(a.undefined());//报错
+	
+	
+	
+String()函数
+强制转换
+	number,null,undefined,boolean都可以转换
+	String(123undefined null true)
+	
+ -->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<script type="text/javascript">
+    var a, b, c;
+    a = 1;
+    b = 2;
+    c = a = b;
+    document.write(c)
+</script>
+
+<body>
+</body>
+
+</html>
