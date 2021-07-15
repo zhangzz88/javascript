@@ -241,9 +241,41 @@ console.log(res)
 
 
 
-描述：数组的方法()：
+描述：数组的方法()!
+
+1、push()方法  尾部添加             影响原数组 
+作用：1.添加在数组尾部2.返回长度
+var arr = ['孙悟空', '猪八戒'];
+arr.push('沙和尚');
+var brr=arr.push('沙和尚')//返回的是长度3
 
 
+2、unshift()方法  首部添加          影响原数组
+作用:1.添加在首个元素前面，后面的索引会往后移动。2.返回长度
+a.unshift()   //在首部添加元素
+var b = a.unshift();//返回添加后的数组长度
+
+
+
+
+
+
+
+
+
+3、pop()方法     尾部删除        影响原数组
+作用：1.删除最后一个元素2.返回被删除的元素
+var arr = ['孙悟空', '猪八戒', '沙和尚', '蜘蛛精', '白龙马'];
+arr.pop();
+var brr=arr.pop()
+
+
+
+
+2、shift()方法    首部删除        影响原数组
+作用：1.删除数组首个元素同时,把后面的元素移位到前面的索引2.返回删除的字符串
+a.shift()
+var b = a.shift();
 
 1、slice()方法          不会影响原数据
 作用：1.截取返回数组中某数据
@@ -345,29 +377,15 @@ var crr = arr.join('--');//设置元素和元素之间连接的数据样式
 5、reverse()方法  会影响原数组
 作用：翻转数组（前后互换）
 
-6、pop()方法                会影响原数组
-作用：1.删除最后一个元素2.可以返回被删除的元素
-var arr = ['孙悟空', '猪八戒', '沙和尚', '蜘蛛精', '白龙马'];
-arr.pop();
-var brr=arr.pop()
 
 
-7、push()方法            会影响原数组 
-作用：1.添加在数组尾部2.返回添加的长度
-var arr = ['孙悟空', '猪八戒'];
-arr.push('沙和尚');
-var brr=arr.push('沙和尚')//返回的是长度3
 
 
-8、shift()方法      影响原数组
-作用：1.删除数组首个元素同时,把后面的元素移位到前面的索引2.返回删除的字符串
-a.shift()
-var b = a.shift();
 
-9、unshift()方法    影响原数组
-作用:1.添加在首个元素前面，后面的索引会往后移动。2.返回添加完成后的数组的长度
-a.shift()   //在首部添加元素
-var b = a.shift();//返回添加后的数组长度
+
+
+
+
 
 
 
@@ -382,7 +400,7 @@ var b = a.shift();//返回添加后的数组长度
 
 描述：数组排序
 
-用sort()方法排序          影响原数组
+sort()方法一排序          影响原数组
 作用：1.用来将数组元素排序2.按照unicode编码进行排序
 var arr = [1,2,3,4];
 arr.sort();
@@ -391,8 +409,7 @@ arr.sort();
 
 
 
-用sort()加回调函数来进行排序，可以自己指定规则
-
+用sort()方法二 加回调函数来进行排序，可以自己指定规则
 在sort()添加一个函数，
 回调函数需要指定两个形参，
 浏览器会分贝使用数组中的元素作为实参调用回调函数，然后根据返回值决定顺序
@@ -419,7 +436,7 @@ arr.sort(function(a,b){
 
 
 
-用for循环排序
+用for循环数组排序
 var arr = [1, 24, 5, 2, 23, 5];
     for (var i = 0; i <= arr.length; i++) {
         for (var o = i + 1; o <= arr.length; o++) {
@@ -435,6 +452,50 @@ var arr = [1, 24, 5, 2, 23, 5];
 
 
 
+
+冒泡排序
+var arr = [1, 9, 9, 9, 45, 7, 33, 234, 6, 68, 323, 4, 7, 2, 2, 44, ];
+    for (var i = 1; i < arr.length; i++) {
+        for (var j = 0; j < arr.length - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+            }
+        }
+    }
+console.log(arr)
+
+
+插入排序（把第一个当成有序数组，剩下的无序跟有序对比替换
+ var arr = [1, 9, 9, 9, 45, 7, 33, 234, 6, 68, 323, 4, 7, 2, 2, 44, ];
+        for (var i = 1; i < arr.length; i++) {
+            for (var j = i; j > 0; j--) {
+                if (arr[j - 1] > arr[j]) {
+                    [arr[j - 1], arr[j]] = [arr[j], arr[j - 1]]
+                }
+            }
+        }
+        console.log(arr)
+
+
+
+
+
+二维数组的转置
+var arr = [
+    ['a', 'b', 'c'],
+    ['d', 'e', 'f'],
+    ['g', 'h', 'i'],
+    ['j', 'k', 'l']
+];
+var air = [];
+for (var i = 0; i < arr[0].length; i++) {
+    air[i] = [];
+for (var u = 0; u < arr.length; u++) {
+    air[i][u] = arr[u][i];
+}
+}
+
+        console.log(air)
 
 
 
@@ -452,22 +513,10 @@ var arr = [1, 24, 5, 2, 23, 5];
 </style>
 
 <body>
-    <script type="text/javascript">
-        var arr = [
-            ['a', 'b', 'c'],
-            ['d', 'e', 'f'],
-            ['g', 'h', 'i'],
-            ['j', 'k', 'l']
-        ];
-        var res = [];
-        for (var i = 0; i < arr[0].length; i++) {
-            res[i] = [];
-            for (var j = 0; j < arr.length; j++) {
-                res[i][j] = arr[j][i]
-            }
-        }
-
-        console.log(res)
+    <script type "text/javascript">
+        var arr = [1, 2, 3, 2];
+        arr.pop('3')
+        console.log(arr)
     </script>
 </body>
 
