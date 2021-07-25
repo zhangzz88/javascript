@@ -1,0 +1,360 @@
+<!-- 
+    描述：原型和继承
+
+
+
+    描述：原型
+    概述： 所谓原型，就是一个公共的区域，创建构造函数时，可将公有属性和方法添加到构造函数原型对象中，
+    这样不会影响到全局作用域，也不用一个一个对象添加，就可以使每个对象都具有这些属性方法了。
+    object原型以后就没有原型了
+
+    创建的每一个函数会自动加上protoytpe读：破肉偷太波
+    构造函数用prototype查看
+    实例用__proto__查看
+
+    举个例子如下：
+    function Person() {}    //这个函数的原型是它自己Person
+    function mayclass() {}  //它的原型是他自己mayclass
+    console.log(Person.prototype == mayclass.prototype) //false
+    
+
+
+
+
+    描述：给构造函数添加原型
+    注意：实例arr和add需要用.__proto__来查看原型，class类的Person用.prototype来查看
+    function Person(name, age) {   
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.fn = function() {  //给原型添加方法
+    }
+    person.prototype.a='123';   //这就是给原型公共区域添加变量，所有人都可以用。
+    var arr = new Person('张照宇', 20);
+    var add = new Person('张照宇', 20);
+    arr.a='321';
+
+
+    console.log(arr.a);//上面arr.a已给变量a赋值就不会去找公共区域原型了，用自己的321；
+    console.log(add.a)//add没有设置a的值，就去公共区域原型去找了。就是123
+    //arr是儿子，Person是爸爸，prototype的object是祖宗
+    
+       
+        
+
+
+
+
+
+    描述：原型对象也有原型！（它会一层一层往上找一直到object原型结束）
+
+    下面是构造函数：
+    function Person() {
+    }
+    var add = new Person();
+    console.log(add.__proto__); //输出add的原型对象
+    console.log(add.__proto__.__proto__); //输出add的原型对象的原型
+
+    有些属性就在原型的原型中
+    如属性hasOwnProperty可以查看实例中存不存在某个对象；
+    如下：查看has这个属性是不是在add原型的原型中，结果是的
+    console.log(add.__proto__.__proto__.hasOwnProperty('hasOwnProperty')) //true
+
+
+
+
+
+    原型中的原型总结：（寻找属性的顺序
+    使用对象属性时，第一步在自身中寻找。
+    自身中有直接使用
+    自身没有去原型对象找，原型对象有就使用
+    原型对象也没有，就一直找到object对象的原型
+    object的原型之后就没有原型了，在object原型中都没有找到就返回null。
+
+
+
+
+
+
+
+
+
+
+
+
+
+    描述：在console.log打印的时候可能会出现的问题
+    console输出出现[Object Object]，可能会出现这种问题，是tosring的问题
+    add原型的原型中有totring方法，直接转化了，解决方法就是在add原型中设置tostring，抢先设置了要输出的值，就不用调用原型的原型了。
+
+    function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        Person.prototype.toString = function() {
+            return "Person[name=" + this.name + "]"
+        }
+        var per = new Person("zh");
+        console.log(per)
+
+
+
+
+
+
+
+
+        描述：继承
+        //给原型添加属性方法进行继承
+        function Person(){
+        }
+        Person.prototype.sahello=function(){   //所有跟person的原型相通的都可以使用了
+            console.log('我是添加继承方式')
+        }
+        var add=new Person();
+        add.sahello()  //执行成功
+
+
+
+        //直接替换原型属性方法方式进行继承
+        funciton Person(){};
+        Person.prototype={
+            sahello:function(){
+                console.log('我是替换继承方式')
+            }
+        }
+        var add=new Person();   //替换原型方式进行继承实例要写在继承的下面
+        add.sahello();
+
+
+
+
+
+    object.create()方法进行继承
+    概述：将obj对象的属性方法继承到newobj对象上,这时候newobj的原型就是obj了
+    var onj={
+        name:'张照宇';
+        sayhello:function(){
+            console.log('继承')
+        }
+    }
+
+    var newobj=Object.create(obj);
+    newonj.sayhello(); //“继承”
+    console.log(newobj.__proto__==obj)//true      注意!newobj的原型是obj
+
+
+
+
+
+
+
+
+
+
+
+    //混入继承
+    单个方式
+    var a={};
+    var b={name:'张照宇'};
+    a.name=b.name;
+    console.log(a.__proto__== b.__proto__) //true
+    //或者
+    a=b;
+    console.log(a.__proto__ == b.__proto__) //true
+
+
+    多个统一继承方式
+    var a={};
+    var b={name:'张照宇',age:19,gender:'男'};
+    fucntion person(q,w){
+        for(var i in w){
+            q[i]=w[i]
+        }
+    }
+    person(a,b);//自动赋值了就
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    描述：构造函数简写和原型继承简写方法
+
+    第一步：写一个混入继承
+    function extend(o1, o2) {     //o1和o2内容同步
+        for (var k in o2) {
+            o1[k] = o2[k]
+        }
+    }
+    第二部：编写构造函数简写方法
+    没有简写：
+    function Person(name, age) {  //下面实例赋值的时候必须要name，age这样按顺序写，name不写就会报错，不太好
+        this.name = name
+        this.age = age
+        ...
+        ...
+        .. //放多少你就要写多少
+    }
+    简写后：
+    function Person(options){
+        extend(this,options)   //这里的this就是实例和上面的一样
+    }
+
+    第三部分：编写原型继承简写方法
+    没有简写：
+    Person.prototype.sayHello=function(){
+        console.log('你好，我是' + this.gender + (this.age || '无年龄') + (this.name || '无名'));
+    }
+    Person.prototype.gender = '男'          //这里将gender属性加到公共区域原型中！
+    Person.prototype.modlice = 17319353143;
+    ....
+    ...
+    .. //你在原型添加多少属性就要写多少次。
+
+    
+    简写后：
+    Person.prototype.test=funciton(obj){   //写一个test方法，将内容自动调到原型中
+        extend(this.obj)
+    }
+
+    Person.prototype.test({    //test(obj),这里的obj内容直接加到原型中。
+        sayhello:function(){
+            console.log('你好，我是' + this.gender + (this.age || '无年龄') + (this.name || '无名'));
+        }
+        gender:'男';
+        modclie:1731232231;
+    })
+
+
+
+    var p1=new Person();
+    var p2=new Person({name:'张照宇',age:,home:'涿州'})
+
+    p1.sayhello();
+    p2.sayhello();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    描述：原型链
+
+    概述：对象和原型，构造函数和原型等之间的联系。
+    如两个函数a和b，他们的原型是不等于的，他们原型的原型一般都是objet是同一个最终原型的！
+    构造函数的原型和实例原型一样，原型的原型也是一样
+
+
+
+
+    描述：原型链中的instanceof运算符    obj instanceof Object;//true 实例obj在不在Object构造函数中
+    概述：查看实例是否存在于构造函数的原型链中。
+    如下是注意事项，判断a的实例在不在a函数原型链中，要主要a函数原型链要是变换了a实例就不在了。
+    function a(){};
+    function b(){};
+    var arr=new a();   //arr是a的实例
+    console.log(arr instanceof a)  //arr实例是否存在于a的原型链中  true
+    a.prototype=new b();    //a的原型变成了b的实例（new b())    a的原型中就没了arr，这是一个新的原型链
+    var add=new a();     //这时候a的原型链中多了一个add实例
+    console.log(add instanceof a)   //add存在于a的原型链中。
+
+
+
+
+    描述：原型链中的__proto__ or  prototype or constructor
+    function crear() { //构造函数crear
+    }
+    var arr = new crear();
+    console.log(crear.constructor) //构造函数crear的构造函数是Function函数，Function函数是自身创建的。
+    console.log(crear.prototype.__proto__) //这是crear构造函数的原型的原型是Object
+    console.log(arr.__proto__.__proto__) //这是实例arr的原型的原型是Object
+
+
+
+
+
+    描述：原型链中的构造函数和实例和原型关系
+
+    //如下：一个构造函数perosn
+    funciton person(){};
+    var add=new person();
+    
+    //查看构造函数
+    person.constroctor   //person的构造函数是Function,Function函数是自己创建的
+    add.constroctor      //add实例的构造函数是person函数
+    person.prototypr.constroctor  //person原型的构造函数是person
+
+    //查看原型
+    person.prototype  //查看person的原型
+    add.__proto__     //查看add的原型
+    person.prototype.__proto__  //查看person原型的原型
+原型链就此展开，实例和构造函数和原型之间紧紧相连的关系就是原型链了。
+
+
+    原型链的结构：
+    1.自动定义构造函数和内置构造函数，Object、string、等都是由Function函数创建，Function函数是自己创建的
+    2.每个构造函数都有一个原型对象，构造函数通过prototype来查看原型，原型对象通过constrouctor查看构造函数
+    3.实例对象继承来自构造函数的原型对象，通过__proto__可直接访问原型对象
+ -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        var fom = {}
+        var add = {}
+        var add = Object.create(fom);
+        console.log(add.__proto__ == fom)
+
+
+
+        var fom = {};
+        var add = {};
+        add.__proto__ = fom;
+        console.log(add.__proto__ == fom)
+    </script>
+</body>
+
+</html>

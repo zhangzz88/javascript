@@ -1,48 +1,664 @@
 <!--
+描述：函数funciton
+
+
+进行模块化，组件化，才能更好的维护。减少了重复的代码，更加有条理。(直接调用)
+描述：函数名称：大小写字母，数字，下划线(_)，$,组成不可以是关键字
+
+
+
+描述：创建构造函数
+为什么要创建函数？
+比如我想封装一些语句：
+    document.weite('你好')；
+    console.log('你好');
+
+使用函数后(直接调用就可以统一执行)
+    funciton fun(){
+        document.weite('你好')；
+        console.log('你好');
+    }
+    fun();
+
+
+
+
+
+
+
+创建方式一：
+函数也是一个对象，函数的最初状态是这样：封装在构造函数中。
+    如：var fun =new Function('console.log('你好')')
+
+
+
+创建方式二：
+     funciton fun2(形参1，形参2){   //形参可以任何东西
+         console.log('你好')
+     }
+
+
+创建方式三：（将一个匿名函数赋值给fun）
+     var fun=funciton(){
+         console.log('你好')
+     };
+
+
+
+
+
+
+
+
+
+
+形参案例练习：创建形参id，带入获取id。
+function huoqu(id) {//编写获取id的模板
+    return document.getElementById(id);
+
+}
+function show() {//改变style显示隐藏代码
+    huoqu('demo').style.display = 'block';
+}
+huoqu('btn').onclick = show;//调用两个函数
+
+
+
+
+形参案例练习二：
+function fnn(o) {
+            console.log(o.name, o.age, o.gender)
+}
+var arr = {
+    name: 'a',
+    age: 19,
+    gender: '男'
+}
+fnn(arr)
+
+
+
+
+
+
+
+
+
+
+描述：函数的调用
+调用方式一：
+fucntion first(){
+	console.log('我是无参数函数，直接调用就可以')
+}
+first();  //这里调用
+调用方式二：
+button.onclick=first       //这种调用不用加括号。
+
+调用方式四：
+匿名函数，也叫立即执行函数。
+(function(a,b){
+    alert('我是匿名函数')
+})(10,20)  //括号中添加实参
+
+
+
+
+
+
+调用注意!
+fnn() 和 fnn 两个调用方式不同
+-fnn()是调用函数，直接使用函数的返回值   对象结果
+-fnn是函数对象，相当于直接使用函数对象   对象本身
+
+
+
+
+
+
+
+
+
+
+
+
 描述：函数
-进行模块化，组件化，才能更好的维护。减少了重复的代码，更加有条理。
 
-描述：1、函数返回值
-在页面输入结果会返回给name
-var name=prompt('请输入你的姓名','');
 
-描述;2、函数参数
-逗号后面是参数
-prompt('我的名字是','张照宇')
 
-描述：3、自定义函数
-a和b保存函数调用时传输的参数，就是129和12，带进去后执行。
-	function sum(a,d){
-			c=a*d;
-			return c;
-		}
-	alert(sum(129,12));
-	
-	function sum(a,d){
-		c=a*d;
-		alert(c)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+使用araguments选中全部的实参    读：奥Q门思
+function ffo(){
+	arguments.length    //会返回实参的长度 2
+	arguments           //会返回实参的数组，可以用遍历便利出来  11,22
+}
+ffo('11','22')
+
+
+araguments案例练习:
+function get() {
+    var sum = 0;
+    for (var i in arguments) { //arguments选中了下面所有实参10,20,30，然后开始遍历
+    	sum += arguments[i];
+    }
+    return sum;
+}
+    console.log(get(10, 20, 30))//60
+
+
+
+
+调用方式四：
+使用...调用后面所有的实参
+function greet(num,...thenum){
+	console.log(num);//输出11
+	console.log(thenum)//输出22,33,44,55,这里是第一个实参之后所有的都选中
+}
+greet(11,22,33,44,55)
+
+
+
+
+
+
+
+描述：es6函数设置默认值
+function greet(name, hell = '我是') {  //函数hell初始值是我是，下面调用的时候可以改的
+    alert(hell + name);
+}
+greet('张照宇', '你好')//调用函数
+
+
+
+
+
+
+
+
+
+
+
+
+
+描述：调用函数
+调用函数可在函数前面或者后面都可调用
+
+
+
+
+案例：大小写转化，利用调用函数，参数设置等
+原数据
+<input type="text" id="old">S
+操作
+<input type="button" value="转大写" onclick="deal('upper')">
+<input type="button" value="转小写" onclick="deal('lower')">
+新数据
+<input type="text" id="new">
+
+function deal(opt) {
+str = document.getElementById('old').value;
+    switch (opt) {
+    case 'upper':
+    str = str.toUpperCase();
+    break;
+    case 'lower':
+    str = str.toLowerCase();
+    break;
+    }
+document.getElementById('new').value = str;
+}
+
+
+
+
+
+
+
+
+
+描述：变量作用域（作用范围）
+全局作用域、函数作用域、块级作用域（es6提供）
+
+ var a = 'one';   //全局变量
+function test() { 
+	var a = 'two';//局部变量，如果把var去掉也是全局变量
+	console.log(a)
 	}
-	sum(129,12);
+	test();
+for (let a = 1; a <= 3; a++) {	//块级变量6
+    console.log(a)
+	}
+	console.log(a)
+
+
+
+局部变量，在函数执行过程中存在栈或堆上，执行完成后会进行'垃圾回收机制'，会释放局部变量。要想储存就要reurn或者赋值给全局变量
+
+funciton test(sum){
+	var sum+=1;
+	return sum;//这里返回局部变量的值
+}
+console.log(test(1))
+
+
+var num;//
+funciton test(sum){
+	nuk= sum+1;
+}
+test(1);
+console.log(num)
+
+
+
+
+
+
+
+
+描述：匿名函数
+
+描述：函数表达式
+概述：就是将声明的函数值赋给一个变量，变量完成函数的调用和传递。
+注意！函数表达式需要定义在前面，调用在后面。
+var fn=function sum(num1,num2){
+	return num1+num2;
+}
+fn(1,2)
+
+
+
+
+
+
+
+描述：匿名函数
+概述：没有函数名称的函数，避免全局变量污染和函数名称冲突。
+
+方式一
+var fn=function (num1,num2){  //利用函数表达式的方式定义匿名函数   
+	return num1+num2
+}
+fn(1,2)
+
+
+方式二
+(function (num1,num2){return num1+num2}(1,2));//将函数看做函数对象，完成函数自调用
+
+
+方式三
+document.body.onclick=function (){   //匿名函数处理指定事件
+	alert('hello wor)
+}
+
+
+方式四：箭头函数（es6）
+概述：箭头函数比普通函数等简短。但是受操作符的优先级影响。
+var fn=(num1,num2)=>num1+num2; //=>不是操作符或者运算符
+var fn=(num1)=>num1+1;
+console.log(fn(1,2));
+
+
+
+
+
+
+
+
+
+
+描述：回调函数
+一个函数a作为参数传递给一个函数b，然后再b调用，a就是回调函数，
+ function cal(num1, num2, fn) {
+    return fn(num1, num2);
+}
+console.log(cal(50, 50, function(a, b) {
+    return a + b
+}))
+
+
+
+
+
+描述：使用回调函数的方法
+方法一：map()方法
+ var arr = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]
+        ];
+        var recerse = arr[0].map(function(a, b) {  //就像是嵌套一样，b=0的时候，d=0,1,2; arr的索引0,1,2；里面的0全部返回，这是
+            return arr.map(function(c, d) {		   //一次，第二次返回全部1的值，第三次返回每个元素的2的值，这三次就是b的0,1,2
+                return c[b];
+            })
+        })
+
+
+
+
+
+方法二：forEach()方法(也是遍历需要搭配回调函数)
+var arr=[1,2,3,4];
+arr.forEach(fucntion(value,index,array){  //形参可以任意名称，value是数组内容，index是下标，array是整个数组
+	alert(value)
+
+
+
+
+
+方法三：find()方法      
+作用：测试所有元素,如:比指定数值大的的第一个元素（就是最近的比本元素大的）
+var arr=[1,2,1,3,4];
+var max=arr.find(function(currentValue,index,array){   //currentValue:当前元素的值，index：当前元素的索引，array：元素所属对象
+	return currentValue>2；   //这里返回的是比2大的第一个数字 就是3
+	return index > 0;         //这里返回索引0后面比索引0大的值       
+})
+console.log(max);
+
+
+
+
+方法四：every()方法
+作用：判断数组全部元素是否符合回调函数里面的规则,全部符合返回true，一个不符合返回false
+ var ages = [3, 10, 18, 20, 19, 21];
+    var judge = ages.every((a, b, c) => a > 1) //利用了箭头函数
+    var jud = ages.every(function(a, b, c) {   //a是元素内容，b是索引  c是所在数组对象
+        return a > 4   			//有一个大于1的就是返回true
+    })
+    console.log(judge())
+//比较顺序:当3时，这时比4小，直接false，后不用比较了直接返回false，必须全部是true才返回true。
+
+
+
+
+
+
+
+方法五：some()方法
+作用：判断数组全部元素是否符合回调函数里面的规则，只有一个符合的话返回true，全部不符合返回false
+var arr = [1, 2, 3, 4, 5, 6];
+        console.log(arr.some(function(a, b, c) {
+            console.log(a);
+            return a == 6;
+        }))
+
+
+
+
+
+
+方法六：reduce()方法
+作用：对所有数组中元素调用指定函数，(从左往右)返回值是累计的结果，在下一次调用也是这个结果
+参数有：
+accumulator累加器
+currentValue数组正在处理的元素
+index  数组正在处理的元素索引 
+array 	调用reduce的数组
+initialValue   初始值，要是没有这个就把数组第一个元素当初始值
+
+
+
+var arr = [1, 2, 3];   
+console.log(arr.reduce(function(accumulator, currentValue，index，array，) {
+    return accumulator+currentValue；     //不设initialvalue累加器初始值就是第一个数，遍历从第二个开始
+},initialValue));
+
+
+
+
+
+方法七：reduceRight()方法
+作用：函数也可以作为累加器和数组每个值（从右到左）减少为单个值。
+ var arr = [
+            [0, 1],
+            [2, 3],
+            [4, 5]
+        ];
+        console.log(arr.reduceRight(function(a, b) {
+            return a.concat(b)    //
+        }));
+
+
+var a = ['1', '2', '3', '4', '5'];
+var left  = a.reduce(function(prev, cur){ return prev + cur; });
+var right = a.reduceRight(function(prev, cur){ return prev + cur; });
+
+console.log(left);  // "12345"
+console.log(right); // "54321"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+描述：函数嵌套和作用域链
+函数中嵌套函数，函数执行过程中，找不到某个变量，就会往上层一层一层去找，直到全局函数，这种链式的查询关系就叫作用域链。
+    var i = 36;
+    function fn1() {
+     var i = 90;
+        function fn2() {
+            function fn3() {
+                console.log(i)
+            }
+        fn3()
+        }
+    fn2()
+    }
+    fn1()  //90
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	描述：递归
+	概述：在一个函数里面调用自己，递过去就应该有归不然就会一直在栈中存在不释放。
+	描述：1到100的和
+	 function a(n) {
+            if (n == 0) {
+                return 0;
+            }
+            return n + a(n - 1);
+        }
+        console.log(a(4))
+            
+
+		解释：
+		n=4时；
+		reutrn 4+a(3)  //10
+			   3+a(2)  //6
+			   2+a(1)  //3 
+		       1+a(0)  //1 从下往上开始加
+			   0
+		如同for循环中1到100的和一样，现在的加上以前所有相加的结果和
+ 		
+
+
+
+
+		描述：按照顺序1、1、2、3、5、8、13、21、找出第n项是多少
+		  function arr(n) {
+            if (n < 0) {
+                return '请输入大于0的数组哦'
+            } else if (n == 0) {
+                return 0;
+            } else if (n == 1) {
+                return 1
+            } else {
+                return arr(n - 1) + arr(n - 2)
+            }
+        }
+        console.log(arr(5))
+            
+            解释：把5带入
+            arr(5-1)+arr(5-2)   arr(4-1)+arr(4-2)  arr(3-1)+arr(3-2)   arr(2-1)+arr(2-2)   arr(1-1)+arr(1-2)   
+			arr(4)+arr(3)  		arr(3)+arr(2)      arr(2)+arr(1)      arr(1)+arr(0)   	   1                   
+			第四加第三的结果5      第三加第二的结果3    第二加第一的结果2   第一加在后面的结果1    
+			等于是从左往右开始全部相加就是最后结果  1+1=2  2+1=3  3+2 =5
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	描述：闭包
+	概述：可以在函数外部获取内部变量，让变量的值保存在内存中不释放，js的机制是函数执行完后释放，闭包可以不释放，这样大大占用的内存
+	不可滥用。
+
+
+	  function fn() {
+            var times = 0;
+            var c = function() {
+                return times++;
+            }
+            return c;
+        }
+        var fnn = fn();   //这里将times返回给了fnn变量，实现了再函数外面引用，并存在内存，一直不释放
+        console.log(fnn())//0
+        console.log(fnn())//1
+        console.log(fnn())//2
+        console.log(fnn())//3
+
+
+
+
+
+
+
+
+
+
+
+		案例实践：网页计算器
+	<body>
+    <p>整数1：<input type="text" id="num1" value="1"></p>
+    <p>整数2：<input type="text" id="num2" value="2"></p>
+    <p>
+        <input type="button" value="相加" onclick="calc('add')">
+        <input type="button" value="相减" onclick="calc('sub')">
+        <input type="button" value="相乘" onclick="calc('mul')">
+        <input type="button" value="相除" onclick="calc('div')">
+    </p>
+    <p>结果：<input type="text" id="result" readonly></p>
+
+    <script>
+        //转化div名称
+        function huo(nn) {
+            return nn = document.getElementById(nn);
+
+        }
+        function calc(n) {
+            if (n == 'add') {
+                huo('result').value = parseInt(huo('num1').value) + parseInt(huo('num2').value);
+            } else if (n == 'sub') {
+                huo('result').value = parseInt(huo('num1').value) - parseInt(huo('num2').value);
+            } else if (n == 'mul') {
+                huo('result').value = parseInt(huo('num1').value) * parseInt(huo('num2').value);
+            } else if (n == 'div') {
+                huo('result').value = parseInt(huo('num1').value) / parseInt(huo('num2').value);
+            }
+        }
+    </script>
+</body>
+
 -->
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<script type="text/javascript">
-	function sum(a,d){
-		c=a*d;
-		alert(c)
-	}
-	sum(129,12);
-	
-	
-	
-	</script>
-	
 
-	<body>
-		
-	</body>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <p>整数1：<input type="text" id="num1" value="1"></p>
+    <p>整数2：<input type="text" id="num2" value="2"></p>
+    <p>
+        <input type="button" value="相加" onclick="calc(add)">
+        <input type="button" value="相减" onclick="calc(sub)">
+        <input type="button" value="相乘" onclick="calc(mul)">
+        <input type="button" value="相除" onclick="calc(div)">
+    </p>
+    <p>结果：<input type="text" id="result" readonly></p>
+
+
+
+    <script>
+        for (var i in document) {
+            console.log(document[i])
+        }
+    </script>
+</body>
+
 </html>

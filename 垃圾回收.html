@@ -1,0 +1,41 @@
+<!-- 
+描述：垃圾回收
+概述：当一个没有任何的变量或属性对他引用时候，如a=null，后台堆栈就会自动清理，只要a=new Object()就不会自动清理。无用数据过多，程序会运行缓慢！
+
+    
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        for (var i = 10; i >= 0; i--) {
+            for (var n = i; n >= 0; n--) {
+                document.write('*')
+            }
+            document.write('<br/>')
+        }
+    </script>
+</body>
+
+</html>

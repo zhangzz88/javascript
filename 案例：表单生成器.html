@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="form" method="POST" action="form.php"></form>
+    <script>
+        var elememt = [{
+            tag: 'input', //你用的什么标签
+            text: '姓名', //标签亲前面的说明文本
+            attr: { //标签里面的属性
+                type: 'text',
+                name: 'user'
+            },
+            option: null
+        }, {
+            tag: 'input',
+            text: '性别',
+            attr: {
+                type: 'radio',
+                name: 'gender'
+            },
+            option: {
+                m: '男',
+                w: '女'
+            }
+        }, {
+            tag: 'input',
+            text: '爱好',
+            attr: {
+                type: 'checkbox',
+                name: 'hobby[]'
+            },
+            option: {
+                simming: '游泳',
+                reading: '读书',
+                running: '跑步'
+            }
+        }, {
+            tag: 'select',
+            text: '住址',
+            attr: {
+                name: 'area'
+            },
+            option: {
+                '': '--请选择--',
+                bj: '北京',
+                sh: '上海',
+                sz: '深圳'
+            }
+        }, {
+            tag: 'textarea',
+            text: '自我介绍',
+            attr: {
+                name: 'introduce',
+                rows: '5',
+                cols: '50'
+            }
+        }, {
+            tag: 'input',
+            text: '提交',
+            attr: {
+                type: 'submit',
+                value: '提交'
+            },
+            option: null
+        }];
+
+
+
+        //构造函数把elememt进去成为fomoo的属性。
+        var fomoo = function(data) {
+            this.data = data;
+        }
+
+        //创造构造函数实例html
+        var html = new fomoo(elememt);
+
+
+
+        //在fomoo构造函数中创建careat方法
+        fomoo.prototype.careat = function() {
+
+            //这个html是返回到页面的
+            var httm = '';
+
+            //编写careat方法的功能，开始遍历出对象中的每一项
+            for (var i in this.data) {
+                //把遍历的存到item中
+                var item = {};
+                //这一步已经遍历了二维的所有对象
+                for (var w in this.data[i]) {
+                    item[w] = this.data[i][w];
+                }
+
+
+                //这一步是把选项中遍历好的，用js输出成表单页面，这里也自创一个方法，进行面向对象编程。
+                //builder对象是用来实现将数组转化成页面表单，tohtml属性是返回生成好的表单给builder对象。
+                httm += builder.toHTML(item); //这里的item就是六行数组
+                // console.log(item)
+            }
+            console.log('<table>' + httm + '</table>')
+            return '<table>' + httm + '</table>'
+        }
+
+
+
+        var builder = {
+
+
+            //toHTML方法用来将下面所有的函数汇总。
+            toHTML: function(obj) {
+                var html = this.item[obj.tag](this.attr(obj.attr), obj.option)
+
+                return '<tr><th>' + obj.text + '</th><td>' + html + '<td></tr>'
+            },
+
+
+            //返回的是所有标签的属性。
+            attr: function(attr) {
+                var html = '';
+                for (var n in attr) {
+                    html += n + '=' + '"' + attr[n] + '"';
+
+                }
+                return html
+            },
+            //item属性用来生成一共六行的表单，三个input，一个select，一个textarea
+            item: {
+                input: function(arr, option) {
+                    var html = '';
+                    if (option === null) {
+                        html += '<input' + ' ' + arr + '>'
+                    } else {
+                        for (var r in option) {
+                            html += '<lable>' + '<input' + " " + arr + 'value=' + '"' + r + '"' + '>';
+                            html += option[r] + '</lable>';
+
+                        }
+                    }
+
+                    return html
+                },
+                select: function(arr, option) {
+                    var html = '';
+                    for (var i in option) {
+                        html += '<option>' + option[i] + '</option>';
+
+                    }
+                    return '<select' + ' ' + arr + '>' + html + '</select>';
+
+                },
+                textarea: function(attr) {
+                    var html = '';
+                    html += '<textarea' + ' ' + attr + '>' + '</textarea>';
+                    return html;
+                }
+            },
+
+
+
+
+
+        }
+
+
+
+
+
+
+        //因为html要赋值到form中，需要转化，这里就自创一个方法，体现出js面向对象的优势
+        //把html赋值到form里面去，但是不能直接赋值，获取到的是object；需要把html转化。使用自创careat方法进行输出表单
+        document.getElementById('form').innerHTML = html.careat();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!-- 
+描述：this
+概述:this默认就是存在的，只不过是隐藏了，创建对象的时候他就是存在的。
+
+
+函数方式调用this是window
+function fnn(){
+    console.log(this) //this是window
+}
+fnn();
+
+
+案例
+function fnn() {
+    console.log(this.name)
+}
+var name = '张照宇';
+console.log(name)
+
+
+
+
+
+
+
+
+
+
+方法调用this是对象
+function fnn(){
+    console.log(this)
+}
+var a={
+    name:'张照宇',
+    add:fnn
+}
+a.add(); //this是a
+ -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        add = {
+            name: '李四',
+            getname: function() {
+                console.log(this.name)
+            }
+        }
+        add.call({
+            name: '张三'
+        })
+        add.getname()
+    </script>
+</body>
+
+</html>

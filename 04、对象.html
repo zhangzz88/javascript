@@ -1,0 +1,606 @@
+<!--
+描述：对象
+一个对象由属性和方法组成
+
+
+描述：面向对象
+面向对象可以使程序灵活性、健壮性、可重用性、可扩展性、可维护性、提升
+
+什么是面向对象和面向过程？
+面向过程：注重的是具体步骤，只有按照步骤一步一步走才可以，凡事都靠自己全部完成，
+面向对象：注重的是一个个对象，对象自己干自己的，我们发号施令，指挥这些对象完成任务，可以将同一类事务操作代码封装成对象，然后通过对象调用
+。
+
+面向对象特征:封装性，继承性，多态性。
+1、封装性：
+隐藏了内部细节，只给外面一个接口，你想要什么就调接口就行了。
+
+2、继承性：
+如动物分为猫类和犬类，猫分狸花猫，波斯猫，狗哈士奇，沙皮狗   
+我想让猫类抓老鼠，猫类的继承者两只猫就开始抓老鼠了。
+string对象就有toUpperCase()方法，这个方法就是继承string对象的哦，增强代码复用率，方便。
+
+3、多态性
+一个tostring在不同类型会有不同效果
+var a=123;
+var b =[1,2,3];
+var c=function(){}
+}
+
+a.toString()='123';
+b.toString()='1,2,3'
+c.toString()=function(){}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+描述：对象是什么？
+1、储存数据方式一：用变量
+var a='张三';
+var b='李四';
+var d='张二'；
+...
+..
+
+
+2、储存数据方式二：对象    方便存取
+var arr={a:'张照宇'，b:'李四'，d:'张二'......}；
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+描述：对象分类
+1、内置对象：
+ES制定的标准，比如：Math  String Number Boolean Function Object ...直接拿来用
+2、宿主对象：
+就是运行js的环境的对象，一般就是浏览器，比如BOM（浏览器对象模型） DOM（文档对象模型）
+3、自定义对象：
+    创建对象：
+        var obj=new Object()和var obj={};两种方式是完全相等的。
+        第一种方法是先创建一个对象，在把构造函数引入
+    给对象加属性
+        var arr={name:'张照宇'};
+        var arr.name='张照宇';
+        var arr['name']='张照宇';
+    删除对象：
+        delete obj.name;
+    对象输出：
+        对象名是不法名字的输出方法
+            var arr = {123: '我代表所有非法名称'};  //123非法名称
+            var n='123';
+            错误输出：arr.123             
+            正确输出：arr['123']        调用的时候用[]加引号！（常理来说所有名称都能起）
+            正确输出：arr[n]        //使用变量的值也可以           
+
+        对象名正常情况输出下：
+            var arr={name:'张照宇'};
+            var n='李四'
+            正确输出：arr.name
+            正确输出：arr['name']
+            正确输出：arr[n]        //注意：使用变量的值也可以，这样会更加有可动性。
+    
+            对于arr[n]的扩展：
+            var arr = {tag: 'input'}；
+            var builder ={
+                tiem: {
+                    input: function() {
+                        return 1
+                    }
+                }                     
+            }
+            这时候我想调用builder.item.input()方法
+            builder.tiem[arr.tag];       //这里的arr.tag转化就是'input'
+
+
+
+
+            
+
+
+
+    检查整个原型链中是否含有name属性(in运算符)
+            var arr={name:'张照宇'};
+            console.log('name' in arr) //返回true或者false
+
+    只检查本对象是否含有name属性(hasOwnProperty运算符)
+            function Person(){}；
+            Person.ptototype.name='张照宇'
+            var add=new Person();
+            console.log(add.hasOwnProperty('name'))  //只查看add实例，不去原型中看
+            扩展： hasOwnProperty是谁的对象？是原型的原型object中的！
+
+
+
+
+
+
+
+描述:获取对象的几个情况
+
+我想获取input对象？
+builder.tiem[arr.tag]()) //tiem[arr.tag]等于是tiem['input']
+builder.tiem['input']()) //tiem['input']等于是tiem.input
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+描述：json（对象符号）
+json是一个字符串，用双引号包裹对象成员名和不同类型的数据，用于数据存储交互
+如：var a={"name":"zhaoyu","age":24,"work":true,"arr":[1,2]}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+描述：动态给对象增加属性成员
+<input type="text" value="name" id="k">
+<input type="text" value="zhaoyu" id="u">
+
+<script>
+    function fn() {
+        k = document.getElementById('k');
+        u = document.getElementById('u');
+        var a = {};
+        a[k.value] = u.value;   //a对象中动态获取属性name，动态获取name的值zhaoyu
+        console.log(a)  //name:zhaoyu
+    }
+    fn()
+</script>
+
+
+        
+    
+
+
+
+
+
+
+
+
+
+
+描述：对象中属性、值、方法的遍历
+
+属性值遍历
+ var arr = {
+            name: '张照宇',
+            age: 18,
+            modlie: 1731812122,
+        }
+for (var i in arr) {     //变量i保存所有对象名称，arr[i]可访问所有值
+    console.log(i + ':' + arr[i])
+}
+
+
+方法值遍历
+var ar = {
+    fn: function() {
+        alert('1')
+    },
+    dis: function() {
+        alert('2')
+    }
+}
+for (var i in ar) {  //遍历方法
+    ar[i]()     //调用方法
+}
+
+
+
+
+
+
+
+
+
+
+
+描述：深拷贝和浅拷贝
+
+深拷贝（a和b之间复制完了各走各的路，不影响互相）
+function deepCopy(n) { //n就是被copy的对象
+    var o = {}; //保存成员
+    for (var i in n) { //遍历n的每一个成员
+        o[i] = (typeof n[i] === 'object') ? deepCopy(n[i]) : n[i]; //实现复制，如果是object就递归，如果不是对象
+        }
+    return o;
+}
+
+var p1 = {name: '张飞'};
+var p2 = deepCopy(p1);
+p2.name = '刘备';
+
+p1.name //张飞 
+p2.name //刘备  经过深度拷贝，p2和p1已经分开了
+
+
+
+
+
+浅拷贝（修改a后b也会受影响）
+    var arr = {name: 'zhangzhaoyu'};
+    var add = arr;
+    add.name = '刘备';   
+    console.log(arr)  //name都是刘备了
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+描述：string中的对象
+
+var str = 'helloword';
+console.log(str.length);      //长度
+console.log(str.charAt(1));       索引为5的字符
+console.log(str.indexOf('o'))     首次出现o的索引
+console.log(str.lastIndexOf(5))   最后出现o的索引
+console.log(str.substring(5))     从5到最后的内容
+console.log(str.substring(5, 7))  从位置5到位置7的内容
+console.log(str.substr(5))        从位置5到最后的内容
+console.log(str.substr(5, 2))     从位置5到后面2个字符的内容
+console.log(str.toLowerCase())    小写
+console.log(str.toUpperCase())    大写
+console.log(str.split('l'))       从字符串l开始分割
+console.log(str.split('l', 3))     l开始分割，最多分3次
+console.log(str.replace('word', 'js'))  替换word成js
+
+
+开发中会常用到方法
+案例：判断name中有没有admin。有就报错
+var name = 'Administad';
+if (name.toLowerCase().indexOf('admin') != -1) {
+    alert('admin不可以！')
+}
+
+
+
+
+
+
+
+
+
+描述：number中的对象
+var a = 11232.123
+console.log(Number.MAX_VALUE) //这里是Number的构造函数，   number表示的最大数值,超过了几intfinty
+console.log(Number.MIN_VALUE) //number表示最小数值   超过了就-inifinty
+console.log(a.toFixed())       //四舍五入
+console.log(a.toFixed(1))      //保留小数点1位
+console.log(a.toFixed(6))     //保留小数点6位，不够补0
+
+
+
+
+
+描述:Math的对象
+math对象  对数值进行数学运算。
+console.log(Math.PI)            //PI就是圆周率
+console.log(Math.abs(-5))       //-5的绝对值
+console.log(Math.max(1, 2, 3))  //1,2,3中最大的值
+console.log(Math.min(1, 2, 3))  //1,2,3中最小的值
+console.log(Math.pow(2, 2))     //2的2次方
+console.log(Math.sqrt(5))       //5的平方根
+console.log(Math.ceil(12.12))   //向上取整
+console.log(Math.floor(12.12))  //向下取整
+console.log(Math.round(12.12))  //四舍五入的整数值
+Math.random() * (100 - 1) + 1)  //随机数
+
+案例：100毫秒输出一个随机数
+function fn() {
+
+    console.log(Math.round(Math.random() * (100 - 1) + 1))
+}
+var aa = setInterval(fn, 100); //需要设置一个变量储存。
+   
+
+
+
+
+
+
+
+
+
+
+
+描述：data对象
+//data对象
+var date = new Date(); //基于当前时间创建时间对象
+console.log(date); //当前年年、月、星期、日、小时、分钟、秒
+
+console.log(date.getFullYear()); //年
+//date.setFullYear(2019) 修改年
+
+console.log(date.getMonth() + 1) //月（0-11）      
+    // date.setMonth(4)//修改月
+
+console.log(date.getDate()) //日
+    // date.setDate(30) //修改日
+new Date(2021,1,0)//获取2021.1月的天数
+
+console.log(date.getDay()) //星期
+new Date(y, 0).getDay()//获取y年的1月1日星期数
+
+console.log(date.getHours()) //小时
+    //date.serHours(12)   //修改小时
+
+console.log(date.getMinutes()) //分钟（0-59）读： 眯尼次
+    //date.setMinutes(18)  //修改分钟
+
+console.log(date.getSeconds()) // 秒  读：塞肯思
+    //date.serSeconds(30)
+
+console.log(date.getMilliseconds()) //毫秒   mini赛肯思
+    //date.setMilliseconds()  //修改毫秒   
+
+console.log(date.getTime()) //从1970-1-1 0：0:0 距离Date对象所代表时间的毫秒数
+    //Date.setTime(10) //从1970-1-1 0：0:0 计时的毫秒数来设置时间。
+
+
+
+//自己设置时间的两种方式
+    var date = new Date(2019, 9, 1, 11, 53, 4); //括号中是，年月日小时分钟秒 //月是0-11比真实的少了一个月
+    var date2 = new Date("2001-1-11 00:00:00") //
+    document.write(date2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+描述：日历案例
+主要是找条件，什么条件能满足你的需求，
+<style>
+    table {
+        float: left;
+        width: 200px;
+        height: 200px;
+        margin: 30px;
+        font-family: serif;
+        text-align: center;
+    }
+    
+    div {
+        width: 880px;
+        margin: 0 auto;
+    }
+    
+    .to {
+        background-color: aliceblue;
+    }
+</style>
+
+<body>
+<script>
+    var nian = new Date().getFullYear();
+    var year = parseInt(prompt('请输入年份生成日历', nian));
+    ceale(year);
+    function ceale(year) {
+        html = '';
+        console.log(dayy)
+        for (var i = 1; i <= 12; i++) {
+            var daa = new Date(year, i, 0).getDate();
+            html += '<div>'
+            html += '<table>' //开头
+
+            html += '<tr><th colspan="7" class="to">' + year + '年' + i + '月</th></tr > ';
+            html += '<tr><td >一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td><td>日</td></tr>';
+
+            var dayy = new Date(year, i - 1).getDay(); //每个月的一号是星期几
+            var dayy = dayy - 1; //这个数值供空格数调用
+            html += '<tr>';
+            if (dayy > 0) {
+                html += '<td colspan="' + dayy + '"></td>'
+            }
+            for (var m = 1; m <= daa; m++) { //日历30天的输出
+                aa = dayy++;
+                html += '<td>' + m + '</td>';
+                if (dayy % 7 == 0) {
+                    html += '</tr><tr>'
+                } else if (m == daa) {
+                    html += '</tr>'
+                }
+            }
+            html += '</table>'; //结尾
+            html += '</div>';
+        }
+        document.write(html);
+    }
+</script>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+描述：错误的处理
+当try中出现错误可以用catch处理,（除了语法错误）都可以。
+
+var o = {};    
+try {
+    o.func();   //这里调用了不存在的方法，开始报错后续所有无法执行
+    console.log('a');
+} catch (e) {   //这里catch用e把错误存起来，并输出
+    console.log(e)
+}
+console.log('b')//正常情情况有错误不能往下执行，但是用完了catch后面也可以执行了并把错误输出
+
+
+
+
+
+
+描述：函数之间的错误
+q调用b函数，q有错误，下面就执行不下去了
+function foo2() {
+    var o = {};
+    o.func(); //这里有错误
+}
+
+function fool() {
+    foo2(); //这里有错误
+    console.log('fool')
+}
+try {
+    fool(); //这也是有错误的，都是连带的
+} catch (e) { //用catch处理后就可以后面继续处理
+    console.log('test')
+}
+console.log('nihao')
+    
+
+
+
+
+
+描述：自己设置错误类型
+try {
+    var el = TypeError('错误');
+    throw el;
+} catch (e) {
+    console.log(e.message)
+}
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+
+<body>
+    <script>
+        function deepCopy(n) { //n就是被copy的对象
+            var o = {}; //保存成员
+            for (var i in n) { //遍历n的每一个成员
+                o[i] = n[i]; //实现复制，如果是object就递归，如果不是对象
+            }
+            return o;
+        }
+
+        var p1 = [
+            name = '张飞',
+            age = 20,
+            gender = '男'
+        ];
+        var p2 = deepCopy(p1);
+
+        console.log(p1)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<select id="one">
+			<option value="-1">请选择</option>
+		</select>
+		<select id="two"></select>
+		<select id="three"></select>
+
+
+
+		<script type="text/javascript">
+			var onee = ['上海', '江苏', '河北'];
+			var twoo = [
+				['上海市'],
+				['苏州市', '南京市', '扬州市'],
+				['石家庄', '秦皇岛', '张家口'],
+			];
+			var threee = [
+				[
+					['黄浦江', '静安区', '长宁区', '浦东区', ]
+				],
+				[
+					['虎丘区', '吴中区', '相城区', '姑苏区', '吴江区'],
+					['玄武区', '秦淮区', '建邺区', '鼓楼区', '浦口区'],
+					['干江区', '广陵区', '江都区']
+				],
+				[
+					['长安区', '桥西区', '新华区', '井框区'],
+					['海港区', '山海关区', '北戴河区'],
+					['桥东区', '桥西区', '宣化区']
+				]
+
+			]
+
+
+
+			var one = document.getElementById('one');
+			var two = document.getElementById('two');
+			var three = document.getElementById('three');
+
+			function createoption(a, b) { //b是需要遍历的组     a是需要添加的变量名称
+				for (var i in b) {
+					a.options.add(new Option(b[i], i))
+				}
+			}
+
+			//省级
+			createoption(one, onee);
+			//当省级发生变化，市级跟着变化
+			one.onchange = function() {
+				two.options.length = 0;
+				createoption(two, twoo[one.value])
+				if (one.value >= 0) {
+					two.onchange()
+				} else {
+					three.options.length = 0;
+				}
+
+			}
+
+			//当市级发生变化，区级跟着变化
+			two.onchange = function() {
+				three.options.length = 0;
+				createoption(three, threee[one.value][two.value])
+			}
+		</script>
+	</body>
+</html>

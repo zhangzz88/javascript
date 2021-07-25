@@ -1,0 +1,127 @@
+<!-- 
+描述：堆和栈
+
+
+    基本数据类型(相当于变量)
+    String Number Boolean Null Undefined
+
+    引用数据类型(相当于对象)
+    Object
+
+
+
+
+
+
+    举例子：
+    如下：a变量和b变量
+    var a1=123;   
+    var a2=a1;(还是123)
+    a1++;
+    这时候a1=124 , a2=123;
+
+    
+
+    栈内存
+    基本数据类型值存在栈中，值和值之间独立，修改一个不影响其他
+
+        栈
+    变量     值
+    -------------
+
+    -------------
+
+    -------------
+    a2  =   123   //这里是复制a1的
+    -------------
+    a1  =   123   //+1后a2不变
+    -------------
+
+
+
+
+
+
+
+    如下：a1对象和a2对象
+    引用类型
+
+    var a1 = {
+        name: '张照宇'
+    };
+    var a2 = arr;
+    a1.name = '李四'
+    console.log(a2)
+
+
+
+       栈内存
+    -------------
+    变量     值
+    -------------  这时候指针就会断了
+    a2      null的时候不会影响a1       堆内存
+    -------------                    0x23区域    //这个区域和左边ox23用指针相连。
+    a2      0x23                  --------------
+    -------------                 -     name   -   //堆里存属性
+    a1      0x23                  -            -
+    -------------                 --------------
+    a2也是赋值a1的内存地址值
+
+
+
+
+
+
+
+    var a1 ={name:'a'};
+    var a2 ={name:'a'};
+    a1==a2   //false  他们在不同的堆地址
+    a1.name==a2.name //true
+
+    var a3=1;
+    var a4=1;
+    a4==a4 //true
+
+
+
+
+         栈
+    变量     值
+    -------------
+    a4      1
+    -------------
+    a3      1
+    -------------
+    a2     0x34   
+    -------------
+    a1     0x12  
+    -------------
+
+
+
+
+    
+
+ -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(window)
+    </script>
+</body>
+
+</html>

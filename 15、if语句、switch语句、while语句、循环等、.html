@@ -3,7 +3,73 @@
 三大流程控制语句，顺序结构、选择结构、循环结构
 自上而下执行代码的顺序就是顺序结构
 
+首先说明，for、if、switch的结束break和continue结束语；读：砍踢牛
+
+
+
+break：结束循环或者当前操作。
+hello:   //声明了这个for叫hello
+for(var i=0:i<=10;i++){
+    for(var a=1;a<=10;a++){
+        if(a=3){
+            break hello;  //可以声明for的名字来结束，要不然默认结束的是最近的a循环！
+        }
+}
+
+
+continue：可以跳过本次的循环或者操作
+for(var i=0;i<=10;i++){
+    if(i==4){
+        continue; //结束一次就
+    }
+}
+
+
+
+
+
+
+
+描述：如下例子，打印100内的质数，加break性能优化了。
+
+console.time('test')  //测试性能速度开头
+for (var i = 2; i <= 100; i++) {
+    var flag = true;
+    for (var j = 2; j < Math.sqrt(i); j++) {  //这里的开方又进行了优化，19的开方是9,9以后的就不用在比较了，
+        if (i % j == 0) {
+            flag = false;
+            break;   //举个例子，如i=100时，i=100需要和j的2-100全部进行比较，明明是到2就已经有结果了，这时加break就行了。
+        }
+    }
+    if (flag) {
+        console.log(i)
+    }
+}
+console.timeEnd('test')  //测试性能速度结束语
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 描述：选择结构
+
 描述：单分支if
 if（age>=18）{
     console.log('已成年');
@@ -21,7 +87,16 @@ if(age=18){
 当age=18的时候true输出是18，否侧false输出 不是18；
 
 
+
+
+
+
+
+
+
+
 描述：多分支
+描述：if语句
 a = prompt('请输入您的分数');
     if (a == 100) {
         alert('满分');
@@ -36,6 +111,8 @@ a = prompt('请输入您的分数');
 
 
 
+
+描述：switch语句
  a = prompt('请输入您的分数');
     switch (a * 10 / 10) {
         case 100:
@@ -50,6 +127,44 @@ a = prompt('请输入您的分数');
 只可以比较表达式的值来进行判断执不执行代码。
 执行流程:首先计算表达式的值，然后将获取的值和case中值依次对比，要是相等就执行case的代码段，遇到break跳出switch语句，
 其中，要是没有匹配的值，就执行default里面的代码，这个可有可无按照具体情况。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -202,11 +317,26 @@ document.write(n + '<br/>');
 
 
 do...while题目:提示你爱我吗？要是不爱我就一直弹，你爱我吗？填写我爱你就提示我也爱你
-var a = prompt('你爱我吗？');
+
 do {
     var a = prompt('你爱我吗？');
 } while (a != '我爱你');
 alert('我也爱你')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -223,7 +353,7 @@ document.write(i);//输出5
 用let声明
 for (let i = 0; i < 5; ++i) {
 };
-document.write(i);//没有输出获取不到let定义的。
+document.write(i);//没有输出,获取不到let定义的。
 let的作用：方便了变量的维护和控制。
 
 
@@ -249,7 +379,7 @@ for (var x = 1; x <= 5; x++) {
 
     
 
-小明单位发了100元的购物卡，小明到超市买三类洗化用品，
+for循环题目：小明单位发了100元的购物卡，小明到超市买三类洗化用品，
 洗发水（15元），香皂（2元），牙刷（5元）。
 要把100元整好花掉，可如有哪些购买结合？
   //a=洗发水（最多6个）  b=香皂（最多50个）  c=牙刷（最多20个）
@@ -266,23 +396,8 @@ for (var x = 1; x <= 5; x++) {
 
 
 
-大马驮2石粮食，中马驮1石粮食，两头小马驮一石粮食，要用100匹马，驮100石粮食，该如何调配？
--->
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>a
-</head>
-
-<body>
-    <script>
-        //a=大马   b=中马  c=小马
+for循环题目：大马驮2石粮食，中马驮1石粮食，两头小马驮一石粮食，要用100匹马，驮100石粮食，该如何调配？
+  //a=大马   b=中马  c=小马
         for (var a = 0; a <= 50; a++) {
             for (var b = 0; b <= 100; b++) {
                 for (var c = 0; c <= 200; c++) {
@@ -292,6 +407,79 @@ for (var x = 1; x <= 5; x++) {
                 }
             }
         }
+
+
+
+ for循环题目：红+白=25 白+黑=31 红+黑=28    三种求共多少？
+ for(var a=1;a<=42;a++){
+ 	   for(var b=1;b<=42;b++){
+ 		   for(var c=1;c<=42;c++){
+ 			   if(a+b==25&&b+c==31&&a+c==28){
+ 				   document.write('红'+a+'白'+b+'黑'+c)
+ 			   }
+ 		   }
+ 	   }
+ }
+
+
+
+for循环题目:1到100的素数，只能被1和自己整除的数
+ for(var i=2;i<=100;i++){
+		var a =true;
+		for(var j=2;j<i;j++){
+			if(i%j==0){
+				a=false;
+			}
+		}
+		if(a){
+			document.write(i+'<hr/>');
+		}
+	} 
+	
+	
+	
+for循环题目：金字塔
+ var level=5;
+	  for(var i=1;i<=level;i++){
+		  var b=5-i;
+		  for(var c=0;c<b;c++){
+			  document.write('&nbsp;')
+		  }
+		  var o=2*i-1;
+		  for(var a=0;a<o;a++){
+			  document.write('*')
+		  }
+		  document.write('<hr />')
+	  }
+
+
+for循环题目：九九乘法表
+ <script>
+	document.write('<table border="1">');
+	document.write('<tr>')
+	for(var i=1;i<=9;i++){
+		for(var a=1;a<=i;a++){
+			c=i*a;
+			document.write('<td>'+a+'*'+i+'='+c+'</td>')
+		}
+		document.write('</tr>')
+	}
+	document.write('</table>')
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
     </script>
 </body>
 

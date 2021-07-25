@@ -7,9 +7,7 @@ DTD是用来定义XML或者THML文件类型，然后浏览器使用他来判断
 就是DTD告诉浏览器，我是啥类型的文档，浏览器知道后决定用啥协议引擎解析渲染，还有切换浏览器模式。
 
 
-而doctype，用来声明文档类型和DTD规范的，验证文件的合法性，
-文件代码不合格，浏览器解析就会出错。
-
+doctype就是用来声明文档类型和DTD规范的，验证文件的合法性，文件代码不合格，浏览器解析就会出错。
 
 常见doctype的有哪些？
 1、<!DOCTYPE html>
@@ -20,50 +18,59 @@ DTD是用来定义XML或者THML文件类型，然后浏览器使用他来判断
 2、html 4.01 strict 该DTD包含所有HTML元素和属性，就是不包括展示性和弃用的元素（如font）读：四追可特
 3、html 4.01 Transitional 该DTD包含所有HTML元素和属性，包括展示性和弃用的元素如（font）读：川贼神no
 
+
+
+
+
+
+
+描述：unicode编码是干什么的？怎么用？
+概述：unicode编码是万国码、统一码、是国际组织制定的容纳全球所有字符的编码方案。
+在js中使用：'\u2620'; 是16进制
+在html中使用：&#9760;是10进制
+
 -->
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title></title>
-	</head>
-	<script type="text/javascript">
-		
-		/*
-		注意：jacascript是从上往下执行的顺序
-		
-		
-		 控制浏览器输出一个警告框
-		alert:额乐儿特
-		alert("这是我输出的");
-		*/
-		
-		/*
-		向body内输出一个内容
-		document：文档   刀Q门特
-		write：写入           外特
-		document.write("nihao")
-		*/
-		
-		/*
-		向控制台输出一个内容
-		console:控制台    康搜
-		log：日志                  
-		console.log("holle world")
-		*/
-		
-		/*
-		输入框
-		var name=prompt('请输入你的名字')；读：破肉母特
-		alert(name);
-		*/
-		
-		
-		
-		
-	</script>
-	<body>
-		
-	</body>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<script type="text/javascript">
+    /*
+                                        		注意：jacascript是从上往下执行的顺序
+                                        		
+                                        		
+                                        		 控制浏览器输出一个警告框
+                                        		alert:额乐儿特
+                                        		alert("这是我输出的");
+                                        		*/
+
+    /*
+    向body内输出一个内容
+    document：文档   刀Q门特
+    write：写入           外特
+    document.write("nihao")
+    */
+
+    /*
+    向控制台输出一个内容
+    console:控制台    康搜
+    log：日志                  
+    console.log("holle world")
+    */
+
+    /*
+    输入框
+    var name=prompt('请输入你的名字')；读：破肉母特
+    alert(name);
+    */
+</script>
+
+<body>
+    <h1 style="font-size: 200px;"> &#9760</h1>
+</body>
+
 </html>

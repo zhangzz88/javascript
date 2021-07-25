@@ -1,0 +1,195 @@
+<!-- 
+描述：全局作用域
+概述：全局作用域在浏览器页面打开的时候创建，关闭时销毁。window代表浏览器的窗口，由浏览器创建。
+
+
+
+
+//全局作用域(创建的都是window的属性或方法)
+<script>
+    //1.全局作用域创建的对象都是window的属性
+    var a =12;     //window.a
+
+
+    //2.全局作用域创建的函数都是window的方法
+    var dnn=function(){     //window.dnn()
+        console.log('我是全局作用域')
+    }
+
+
+
+
+    //内置的一些属性都是window的。
+    window.document.write('我是全局')
+    window.aler('我是全局')
+
+
+</script>
+
+
+
+
+
+
+
+描述:var声明变量和函数
+
+    var a1 = 1;
+    console.log(window.a2) //这时候a2是window的属性，但是没有创建a2属性，就是undefined
+    console.log(a2) // 报错，未声明变量a2.
+
+
+
+    对象和函数为什么可以先输出后定义？
+
+    描述：变量为什么能先输出后定义
+    
+    console.log(a1);   //输出a1   undefined   
+    var a1 = 1          //var在默认所有代码之前进行声明变量，而赋值是按照正常顺序执行！
+    
+    相当于
+    var a1;             
+    console.log(a1);   //var在所有代码之前进行声明变量，而赋值是按照正常顺序执行！
+    a1=1;    
+    
+    
+
+
+
+    描述：函数为什么能先输出后定义
+    fnn(); //成功
+    arr(); //报错
+
+    function fnn() { //这种声明方式默认就是在所有代码之前进行声明，调用在任何地方都可以。
+        console.log('ni')
+    }
+
+    var arr = function() { //这种方式，默认在所有代码之前声明arr变量，后面的函数按照顺序依次执行，执行时未定义报错。
+        console.log('nih')
+    }
+
+
+
+
+
+
+    描述：函数作用域中先输出后定义
+    概述：函数作用域中的数据生命周期短，函数执行完就消失了，全局中变量是页面关闭后才消失。
+    function add(){
+        console.log(a);    //undefined
+        var a=1;
+    }
+
+    相当于
+    function arr(){
+        var a;
+        console.log(a);
+        a=1;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+描述：函数作用域
+概述：一个函数执行完了就自己销毁函数作用域。调用一次就创建一次，域和域之间独立
+
+
+
+函数作用域中可以调用所有全局作用域。
+
+局部访问全局
+var a=1;
+function fnn(){
+    console.log(a)
+};
+fnn();
+
+
+
+
+
+
+全局不能访问局部
+function fnn(){
+    var a=1;
+}
+console.log(a)  //全局不能访问局部函数
+
+
+
+
+
+局部函数访问全局
+fucntion fnn(){
+    var a=1;
+    funciton add(){
+        function arr(){
+            console.log(a) //一层一层网上找
+        }
+    }
+}
+
+
+
+
+描述：函数中加var 是局部变量，不加var是全局变量
+ 
+function fnn(e){   //形参e相当于var e;
+    console.log(e)
+}
+fnn();   //是undfined
+fnn(10); //10
+
+
+案例：
+var a=123;
+function fnn(a){  //这里相当于var a
+    alert(a);
+    a=456;
+}
+fun();   //undefined
+alert(a); //123
+ -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // console.log(d)
+        // var a = 10;
+        // var b = 'hello';
+        // c = true;
+
+        // function fun() {
+        //     console.log('hello')
+        // };
+        //var d = 35;
+    </script>
+</body>
+
+</html>

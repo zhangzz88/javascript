@@ -1,0 +1,351 @@
+<!-- 
+使用constructor 读：肯思chua思特儿   可查看当前对象的构造函数 
+    hasOwnProperty可以查看当前实例有没有某个属性 读：害死坡坡儿立
+
+
+
+
+    描述：工厂函数
+
+    概述：相对于var arr={name:'张照宇',age:18}的字面量{}方法；工厂函数更加方便的创建对象。
+    普通创建对象属性或者方法的方式
+    var arr = {
+        name: '张照宇',
+        age: 20,
+        gender: '男'
+    }
+    var add = {
+        name: 'aa',
+        age: 20,
+        gender: '男'
+    }
+    var acc = {
+            name: 'bb',
+            age: 20,
+            gender: '男'
+        }
+
+    使用工厂函数
+    function create(name, age, gender) {
+        var o = {};
+        o.name = name;
+        o.age = age;
+        o.gender = gender;
+        return o
+    }
+    var arr = create('张照宇', 20, '男')
+    var add = create('aa', 20, '男')
+    var acc = create('bb', 20, '男')
+    console.log(arr)
+
+
+
+
+
+
+
+
+
+
+
+
+
+    描述：内置构造函数
+    概述：就是自带的一些构函数类，string、object、number等等，直接就可以使用
+    .constructor读：肯思戳死特儿，可以来查看对象类型   
+
+    function Object(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    function String(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    var op2 = new String('张照宇', 20)
+    var op1 = new Object('张照宇', 29);
+    console.log(op1)
+    console.log(op2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    描述：自定义构造函数
+    概述：相对于var arr={name:'张照宇',age:18}的字面量{}方法和工厂函数，构造函数可以给对象创建相同特征，
+    可以把几个对象划成一个组，区分对象类型。
+    
+    function claa(name, age) { //这里的claa就相当于java中的class类
+        this.name = name;  //构造函数要加this。
+        this.age = age;
+        this.fnn=function(){
+            console.lo('我是claa构造函数')
+        }
+    }
+
+    function clcc(name, age) {
+        this.name = name;
+        this.age = age;
+        this.fnn=function(){
+            console.log('我是clcc构造函数')
+        }
+    }
+    var add = new claa('张照宇', 20); //这里将claa创建实例变量add，上边的this指向这个add
+    var acc = new clcc('张照宇', 20); //这两个
+    console.log(add); //他的类是claa
+    console.log(acc);//他的类是clcc , 以此就成功给函数添加类进行区分了。
+
+
+
+
+    注意：自定义构造函数的优化问题！
+    function fnn(name, age, gender) {
+            this.name = name,
+            this.age = age,
+            this.gender = gender,
+            this.fun = add
+
+            注意正常的这样写，比如arr和aaa，有实例就创建几个这个方法，优化的写法在下面
+            //this.fun=function(){
+                console.log(this.name)
+            }
+        }
+
+        //优化的写法，创建一个全局的add函数，上面的fun属性想要调用add()，就要去全局域调用，每个arr或者aaa想要调用就去全局找add。
+        function add() {
+            console.log(this.name)
+        };
+
+
+        var arr = new fnn('张照宇', '19');
+        var aaa = new fnn('李四', '19')
+        console.log(arr.fun == aaa.fun)
+
+
+
+
+
+
+
+
+
+
+
+    描述：构造函数中的私有成员
+    function Person(name, age) {
+        var name = '张照宇';   //这里定义的var name不能直接调用
+        this.fnn = function() {   ///使用方法返回值就可以了
+            return name
+        }
+    }
+    var add = new Person();
+    console.log(add.name) //undefined
+    console.log(add.fnn()) //返回张照宇 
+
+
+
+
+
+
+
+
+
+
+
+    描述:class
+    概述:在java中有class（本质就是语法糖），js中es6也有，但是js一般都是用通过函数的形式实现相同的效果
+    语法糖:就是用更简洁的句子表示复杂的过程，就跟成语一样。
+    不使用class也可以得到相同效果，不建议使用，有的浏览器不支持。
+    class Person {
+        constructor(name, age, gneder) {   
+            this.name = name;
+            this.age = age;
+            this.gneder = gneder;
+        }
+        introd() {
+            console.log(this.name)
+        }
+    }
+    var p = new Person('JIM', 19, '男')
+    p.introd();//JIM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    描述：构造函数中return
+    概述：就是在函数中，return数组和对象就就不会是你设置的那个class类了。注意一下。
+
+    function Person() {   //这里设置的是Person,按理说函数中的数据都是Person类型数据
+        return 12;    //conosle后,发现是Person,没错
+        return [1];   //console后,发现是Array,错误了
+        return {};    //console后,发现是Object,错误了
+    }
+    var a = new Person();
+    console.log(a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    描述：this的指向
+
+    //构造函数this指向
+    function Person(name) {
+        this.name = name; //this指向实例add
+    }
+    var add = new Person('张照宇');
+
+
+
+
+    //window的this
+    var name = 'zhangzhao';
+
+    function fnn() {
+        console.log(name) //name的this指向window.name，是全局的对象
+    }
+    fnn()
+
+
+
+
+
+
+    //对象的this
+    var arr = {
+        name: 'zhao' //name的this指向arr
+    }
+    var add = {};
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //改变函数内的this指向
+
+    var name = 'zhang'; //全局对象
+    function meath() {
+        console.log(this.name) //这时候this指向的是window.name='zhang'
+    }
+    meath();   //console输出‘zhang’
+
+    //开始更改this，两种方法
+    meath.call({   
+        name: 'zhao' //call是用一个一个参数方式传递第二项值
+    })
+    meath.apply({
+        name: 'yu' //apply是用数组的方式传递第二项值
+    })
+
+
+
+
+    //绑定this
+    function are(a, b) {
+        console.log(this.agee + a + b);
+    }
+    var agee = 200;
+    var test = are.bind({
+        agee: 100
+    }, 1, 1)
+    are(1, 1);
+    test()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+ -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fnn(name, age, gender) {
+            this.name = name,
+                this.age = age,
+                this.gender = gender,
+                this.fun = add
+        }
+
+        function add() {
+            console.log(this.name)
+        };
+
+
+        var arr = new fnn('张照宇', '19');
+        var aaa = new fnn('李四', '19')
+        console.log(arr.fun == aaa.fun)
+    </script>
+</body>
+
+</html>
