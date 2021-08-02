@@ -1,0 +1,60 @@
+<!-- 
+
+
+    描述：包装类（在转化数据类型的时候，需要将基本数据类型先转成对象后再调用方法）
+    基本数据类型：
+    string number boolean null undefined
+
+    引用数据类型
+    object
+
+    有三个包装类，可将基本数据类型转换为对象
+    String() 将基本数据字符串转换为string对象
+    Number() 将基本数据数值转换为number对象
+    Boolean()将基本数据布尔值转化为boolean对象
+    
+
+
+
+
+    有个问题？
+    var s=123;
+    s=s.toString(); 
+    console.lo(typeof s) //此时s为什么可以被转换成字符串类型，tostring()不是一个方法吗，只有对象才能
+    调用方法或者属性，这里的s就是一个变量或者说是一个数值，怎么做到的？
+
+
+
+    答：
+    new Number(s); //先包装成这样子的对象。
+    等于是 new number(s).tostring()
+    浏览器会临时使用包装类将s先转换成对象。进行转化完成后又转回来了。
+
+    举个例子。
+    var a = '123';
+    document.write(a.bold())
+    这里的a是一个字符串变量，为什么可以直接调用bold()方法，不是只有对象可以调吗？
+    这里的a浏览器会自动先转换成 new String(a),现在成了一个string对象,然后调用
+    string对象的bold方法，就ok了，调用完了，再从对象转换回来到字符串
+
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = '123';
+        document.write(a.bold())
+    </script>
+</body>
+
+</html>

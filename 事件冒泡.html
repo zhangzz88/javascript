@@ -1,0 +1,180 @@
+<!-- 
+    描述：事件的冒泡
+    概述：后代事件被触发，其祖先相同事件也会被触发。儿子的事件触发，父亲的相同事件也会触发，是向上传递的。
+    注意：window.形参.cancelBubble=true//可以关闭事件向父辈冒泡
+
+
+
+
+    案例事件冒泡：
+    <div>
+        我是div
+        <span>我是span</span>
+    </div>
+    <script>
+        //三个元素，是父子关系，
+        div.onclick=funciton(){alert('我是div')}
+        span.onclick=funciton(){
+            alert('我是span')   
+            window.event.cancelBubble = true      //这里阻止向父辈传递冒泡事件
+        }
+        document.body.onclick=funciton(){alert('我是body')}
+    </script>
+
+    说明：事件冒泡就是，点击span时，div和body相同事件都会弹出来。
+
+
+
+
+
+
+
+    案例取消div跟随鼠标事件冒泡
+    <div id="box">
+    </div>
+    <div id="box2" style="height: 100px;width: 200px;background-color: red;"></div>
+
+    <script>
+        var box = document.getElementsByTagName('div')[0];
+        var box2 = document.getElementById('box2');
+        document.onmousemove = function(event) {
+            box.style.left = window.event.clientX + 'px'
+            box.style.top = window.event.clientY + 'px'
+        }
+        box2.onmousemove = function(event) {
+            window.event.cancelBubble = true //阻止了box2的触发冒泡事件传递到docuemnt父亲的手上。
+                //鼠标移动到box2的时候，就没有触发document的冒泡事件。
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+    描述：事件的委派
+    概述:将儿子事件同一绑定给共同的祖先元素，后代元素事件触发，会一直冒泡到祖先元素
+    从而通过祖先元素相应函数来处理事件
+    
+    通过委派减少事件绑定的次数，提高程序的性能
+    <ul>
+        <li class='link'>aaa</li>
+        <li class='link'>aaa</li>
+        <li class='link'>aaa</li>
+    </ul>
+    //老方法点击每一个li都alert
+    for(var i=0;i<li.length;i++){
+        li[i].onclick=funciton(){
+            alert('我是li')
+        }
+    }
+    //委派事件方法，此时的方法是点击ul任何东西都alert，不太好
+    ul.onclick=fucniton(){
+        alert('我是li')
+    }
+    //改进委派事件方法
+    ul.onlick=funciton(event){
+        //target:当前执行事件的元素
+        if(event.target.className='link'){
+            alert('我是li')
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    描述：事件的绑定
+
+    //如下，输出2，1已经被覆盖
+    div.onclick=funciton(){
+        alert('1')
+    }
+    div.onclick=funciton(){
+        alert('2')
+    }
+
+
+
+    //如下，依次输出1、2  ie8以上支持
+    div.addEventListener('click',funciton(){alert('1'),false})   
+    div.addEventListener('click',funciton(){alert('2'),false}) 
+
+    //如下，依次输出2、1   ie8以下支持
+    div.attachEvent('oncklick',function(){alert('1')})
+    div.attachEvent('oncklick',function(){alert('2')})
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    #box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+    }
+</style>
+
+<body>
+    <button id="btn">添加超链接</button>
+
+</body>
+<script>
+    //先绑定的先执行，后绑定的后执行。ie8不支持addeventlistener
+    var btn = document.getElementById('btn');
+    // btn.addEventListener('click', function(even) {
+    //     alert('1')
+    // }, false);
+    // btn.addEventListener('click', function(even) {
+    //     alert('2')
+    // }, false);
+    // btn.attachEvent("onclick", function() {
+    //     alert('1')
+    // })
+    var arr = btn.addEventListener || window.attachEvent
+
+    function fnn(a, b, c) {
+
+        if (a.addEventListener) {
+            a.addEventListener(b, c, false)
+        } else {
+
+            a.attachEvent('on' + b, c);
+        }
+
+    }
+    fnn(btn, 'click', function() {
+        alert('1'), false
+    })
+    fnn(btn, 'click', function() {
+        alert('2'), false
+    })
+</script>
+
+</html>

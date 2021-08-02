@@ -112,7 +112,7 @@
 
 
 
-    注意：自定义构造函数的优化问题！
+    注意：自定义构造函数的优化问题！(延伸出了原型对象)
     function fnn(name, age, gender) {
             this.name = name,
             this.age = age,
@@ -125,8 +125,10 @@
             }
         }
 
+
+        //虽然是优化了，但是在全局中定义对象，会出现污染状态，不安全！
         //优化的写法，创建一个全局的add函数，上面的fun属性想要调用add()，就要去全局域调用，每个arr或者aaa想要调用就去全局找add。
-        function add() {
+        function add() {     
             console.log(this.name)
         };
 
@@ -331,16 +333,16 @@
 <body>
     <script>
         function fnn(name, age, gender) {
+
             this.name = name,
                 this.age = age,
-                this.gender = gender,
-                this.fun = add
+                this.gender = gender
+
+
         }
-
-        function add() {
-            console.log(this.name)
-        };
-
+        fnn.prototype.fun = function() {
+            return this.name
+        }
 
         var arr = new fnn('张照宇', '19');
         var aaa = new fnn('李四', '19')

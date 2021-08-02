@@ -1,0 +1,176 @@
+<!-- 
+    描述：正则表达式
+
+
+
+
+    麻烦方式：
+    var 变量=new RegExp('正则表达式'，'匹配模式');
+    匹配模式分为'i'忽略大小写,'g'全局匹配模式
+
+
+
+    简单字面量方式：
+    var 变量=/正则表达式/匹配模式
+    var reag=/a/i   //存在不存在一个a，大小写
+
+
+     
+
+
+    或：(|)([])
+    reag=/a|b/i
+    reag=/[a,b,c,d,e]/
+    reag=/[a-z]/ //a到z，任意小写的
+    reag=/[A-z]/ //a到z，小写大写都可
+
+
+    案例
+    内容是不是有abc或者aec或者aac，其中有一个就可以
+    rag=/a[bea]c/  //有变动的地方用[]
+    console.log(rag.test('abc'))
+
+
+
+
+   
+   
+
+
+
+    连续几次：{}
+   
+        var arr=/[^1-10]/i   //除了1到10都是true
+        var arr = /a{3}/; //判断是不是连续三个a
+        var arr = /(ab){3}/ //判断是不是三个ab
+        var arr = /ab{3}c/ //判断是不是abbbc 
+        var arr = /ab+c/ //b至少出现一次
+        var arr = /ab*c/ //b有没有都可以
+        var arr = /ab?c/ //没有或者只有一个b
+        var arr = /a{1,3}/ //a只能出现1到3次
+        var arr = /a{1}/ //a出现1次及以上
+        var arr = /a{,3}/ //a出现最多3次
+
+        var arr = /^a/ //以a开头
+        var arr = /a$/; //以a结尾
+        var arr = /^a$/ //a是开头后立即是结尾，只能是一个a
+        var arr = /^a |a$/  //a开头或者结尾
+
+        var arr='ab\\'  // 表示被判断的字符串中有一个\
+        var add=/\\/    //设定规则一个\
+        var add=new RegExp('\\\') //构造函数方式设定规则只有一个\
+
+
+        var arr='aaa\.'
+        var add=/./   //表示有没有所有数据
+        var add=/\./   //表示有没有符号.
+        var add=new RegExp('\\\.') //构造函数表示有没有一个.
+     
+
+        var add=/\w/   //表示有任意字母数字还有_
+        var add=/\W/   //除了任意字母、数字、_
+        var add=/\d/    //任意数字都是true
+        var add=/\D/    //除了数字都是true
+
+        var add=/\s/   //有空格就true
+        var add=/\S/   //没有空格就true
+
+        var add=/\bchild\b/   //b是表示单词开头结束，判断在文中有没有这个词，childed这类都是错误的
+
+
+
+
+
+案例：
+    var arr='    nihao   zhaoyu       '  //清空空格       
+    var arr=arr.replace(/^\s+|\s+$/g,'')
+
+
+
+
+案例
+    //手机号规则，11位，1开头，第二位是3-9，三位以后是9位
+    //^1 [3-9]   (0-9){9}$
+    var a = '17319353143'
+    var arr = /^1[3-9][0-9]{9}$/;
+    console.log(arr.test(a))
+
+
+
+
+
+
+
+    RegExp对象的方法：
+    test()的使用：
+    概述：检查test内容是否符合regexp规则
+    var arr=new RegExp('a')        //这里的a是规则区分大小写
+    var arr=/a/                 //简单方法也可以
+    console.log(arr.test('abcf')) //true  按照规则在test中找a，
+
+    
+
+
+    正则表达式string对象的方法：
+    split方法()
+    概述:拆分字符串按照括号中内容
+    var str='1b3n5b3o5p2o1';
+    var arr=str.split(/[A-z]/);
+    console.log(arr)
+
+
+    search()方法  
+    概述：搜索字符串中是否有指定内容和内容位置
+    var str='adf abc adc aec' //查找页面字符串abc或adc或aec，是否存在，存在的位置。
+    var arr=str.search(/a[bde]c/) //没有就返回-1
+
+
+    match()方法
+    概述：根据正则表达式，从一个字符串将符合条件的饿内容提取出来
+    但是match方法只会提取一个数据，就不继续往下了。用g解决
+    var arr='1h2h4v2j4k2iUIO';
+    var str=arr.match(/[A-z]/g)  //g就是全局模式，全部字母都找一圈。这时候想写i直接写就行。[A-z]/ig
+    Array.isArray(str)  //true  是用数组把索取的内容存起来
+
+
+
+    replace()
+    概述：替换字符串指定内容成为新的内容   默认只替换第一个
+    var arr='1b2b4b2b';
+    var add=arr.replace(/[A-z]g,'@')
+    var add=arr.replace(/[A-z]g,'') //可以替换成空字符，就是空了
+    add==1@2@3@4@2@；
+
+
+
+
+
+    邮箱案例：
+     //hello  .nihao @ abc .com .cn
+        //    /^\w{3,} (\. \w)* @ [A-z 0-9]+( \. [A-z]{2,5}){1,2}$/
+        var arr = /^\w{3,}(\.\w+)*@[A-z 0-9]+(\.[A-z]{2,5}){1,2}$/;
+        var add = '2251249172.nihao@qq.com.com'
+        console.log(arr.test(add))
+
+
+
+
+
+ -->
+。
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    </script>
+</body>
+
+</html>

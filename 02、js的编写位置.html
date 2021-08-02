@@ -15,37 +15,67 @@ jacascript异步加载！
 async用于异步加载，先下载文件，不阻塞其他代码执行，下载完成后再执行。
 defer用于延时执行，先下载文件，直到网页加载完成后执行。
 
+
+
+
+
+
+
+js代码script为什么写在body下面呢？
+js页面代码是从上而下进行执行，把代码放在顶部，html中的元素还没获取到就进行js操作，会获取不到数据。
+这样做就是为了，页面加载完毕后在进行js操作。
+优点：如果把代码写在上面，会把代码预加载，不如直接先加载页面，后加载代码，这样就可以。
+
+
+不想卸载body下面就想写在页面上面，可以：
+onload事件：在整个页面加载完成后触发
+window.onload=funciton(){
+	//写内容
+}
+
+
+
 -->
 
 
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	
-	
-	<script type="text/javascript" src="js/外链式文件.js"></script>
-	<script type="text/javascript">alert("我是内嵌式")</script>
-	<script type="text/javascript" src="http://js.test/file.js" async>console.log('我是异步加载')</script>
-	<script type="text/javascript" src="http://js.test/file.js" defer>console.log('我是推迟加载')</script>
-		
-	
-	
-	
-	
-	
-	<body>
-		
-		
-		<button onclick="alert('我是行内式')">我是行内式</button>
-		<a href="javascript:alert('我是行内式');">我是行内式</a>
-		
-		
-	</body>
-	
-	
-	<script type="text/javascript">console.log('我是body底部加载，先下载，行脚本')</script>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+
+<script type="text/javascript" src="js/外链式文件.js"></script>
+<script type="text/javascript">
+    alert("我是内嵌式")
+</script>
+<script type="text/javascript" src="http://js.test/file.js" async>
+    console.log('我是异步加载')
+</script>
+<script type="text/javascript" src="http://js.test/file.js" defer>
+    console.log('我是推迟加载')
+</script>
+
+
+
+
+
+
+<body>
+
+
+    <button onclick="alert('我是行内式')">我是行内式</button>
+    <a href="javascript:alert('我是行内式');">我是行内式</a>
+
+
+</body>
+
+
+<script type="text/javascript">
+    console.log('我是body底部加载，先下载，行脚本')
+</script>
+
 </html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #dvv {
+        width: 300px;
+        height: 200px;
+        border: 1px solid red;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 10px;
+    }
+    
+    #btnlist {
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    li {
+        width: 30px;
+        height: 20px;
+        list-style: none;
+        float: left;
+        border: 1px black solid;
+        margin: 10px;
+        background-color: blanchedalmond;
+    }
+</style>
+
+<body>
+    <div id="dvv">
+        <ul id="city">
+            <li id="bj">北京</li>
+            <li>上海</li>
+            <li>东京</li>
+            <li>首尔</li>
+        </ul>
+    </div>
+    <div id="btnlist">
+        <div><button id="btn01">创建一个广州节点，添加到city下</button></div>
+        <div><button id="btn02">将广州节点插入到bj前面</button></div>
+        <div><button id="btn03">使用广州节点替换bj节点</button></div>
+        <div><button id="btn04">删除bj节点</button></div>
+        <div><button id="btn05">读取city内的html代码</button></div>
+        <div><button id="btn06">设置bj内的html代码</button></div>
+        <div><button id="btn07">添加昌平节点</button></div>
+    </div>
+    <script>
+        function fnn(a, b) {
+            var btn = document.getElementById(a);
+            btn.onclick = b
+        }
+        //创建一个节点,添加到city下,分两步来做
+        fnn('btn01', function() {
+            //步骤一创建元素节点
+            var li = document.createElement('li');
+            //步骤二创建文本节点
+            var getext = document.createTextNode('广州');
+            //步骤三将文本节点添加到元素节点
+            li.appendChild(getext);
+            //步骤四将元素节点添加到页面
+            var city = document.getElementById('city');
+            city.appendChild(li)
+        })
+
+
+
+        //插入到bj前面
+        fnn('btn02', function() {
+            //步骤一创建元素节点
+            var li = document.createElement('li');
+            //步骤二创建文本节点
+            var getext = document.createTextNode('广州');
+            //步骤三将文本节点添加到元素节点
+            li.appendChild(getext);
+            //步骤四将元素节点添加到页面
+            var bj = document.getElementById('bj');
+            var city = document.getElementById('city');
+            city.insertBefore(li, bj)
+        })
+
+
+
+
+        //替换bj节点
+        fnn('btn03', function() {
+            var li = document.createElement('li');
+            var getxt = document.createTextNode('广州');
+            li.appendChild(getxt);
+
+            var bj = document.getElementById('bj')
+            var city = document.getElementById('city');
+            city.replaceChild(li, bj)
+        })
+
+
+        //删除节点
+        fnn('btn04', function() {
+            var bj = document.getElementById('bj')
+            var city = document.getElementById('city');
+            city.removeChild(bj)
+                //可以代替
+                //bj.parentNode.removeChild(bj)
+        })
+
+
+        //读取city内html代码
+        fnn('btn05', function() {
+            var city = document.getElementById('city');
+            alert(city.innerHTML)
+        })
+
+        //设置bj代码
+        fnn('btn06', function() {
+            var bj = document.getElementById('bj')
+            bj.innerText = '广州'
+        })
+
+        //添加昌平节点（推荐的方法innerhtml和appendchild融合使用）
+        fnn('btn07', function() {
+            var city = document.getElementById('city');
+            var node = document.createElement('li');
+            node.innerHTML = '广州'
+            city.appendChild(node)
+        })
+    </script>
+</body>
+
+</html>

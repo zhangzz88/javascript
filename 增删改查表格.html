@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+        margin: 0 auto;
+    }
+    
+    #new {
+        margin: 0 auto;
+        margin-top: 100px;
+        border: 2px solid red;
+        width: 400px;
+        height: 200px;
+        text-align: center;
+    }
+</style>
+
+
+<body>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        </tr>
+        <tr>
+            <td>照宇</td>
+            <td>2251249172@qq.com</td>
+            <td>5000</td>
+            <td><a href="javascript:;">delate</a></td>
+        </tr>
+        <tr>
+            <td>张三</td>
+            <td>2251249172@qq.com</td>
+            <td>5000</td>
+            <td><a href="javascript:;">delate</a></td>
+        </tr>
+    </table>
+
+    <div id="new">
+        <h2>添加新成员</h2>
+        name: <input type="text" name="namm"><br/> email: <input type="text" name="emali"><br/> salary: <input type="text" name="salary"> <br/>
+        <button id="sub">submit</button>
+    </div>
+
+
+
+
+    <script>
+        //添加新成员
+        var sub = document.getElementById('sub');
+        sub.onclick = function() {
+            var namm = document.getElementsByTagName('input')[0].value;
+            var namms = document.getElementsByTagName('input')[1].value;
+            var nammss = document.getElementsByTagName('input')[2].value;
+            //麻烦方法把数据添加节点
+            // var tr = document.createElement('tr');
+            // var td1 = document.createElement('td');
+            // td1.innerHTML = namm
+            // var td2 = document.createElement('td');
+            // td2.innerHTML = namms;
+            // var td3 = document.createElement('td');
+            // td3.innerHTML = nammss;
+            // var td4 = document.createElement('td');
+            // td4.innerHTML = '<a  href="javascript:;">delate</a>'
+            // tr.appendChild(td1)
+            // tr.appendChild(td2);
+            // tr.appendChild(td3);
+            // tr.appendChild(td4);
+            // var tabb = document.getElementsByTagName('table')[0];
+            // var tbody = tabb.getElementsByTagName('tbody')[0]
+            // tbody.appendChild(tr);
+
+
+
+            //简单方法
+            var tr = document.createElement('tr');
+            var alla = '<a  href="javascript:;">delate</a>'
+            tr.innerHTML = '<td>' + namm + '</td><td>' + namms + '</td><td>' + nammss + '</td><td>' + alla + '</td > ';
+            var tabb = document.getElementsByTagName('table')[0];
+            var tbody = tabb.getElementsByTagName('tbody')[0]
+            tbody.appendChild(tr)
+
+
+
+
+
+            dela()
+
+        };
+
+
+
+
+
+        //点击delate删除效果
+        function dela() {
+            var alla = document.getElementsByTagName('a');
+            for (var i = 0; i < alla.length; i++) {
+                alla[i].onclick = function() {
+                    var flag = confirm('确认删除吗？');
+                    if (flag) {
+                        this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)
+
+                    }
+                }
+            }
+        }
+        dela()
+    </script>
+
+</body>
+
+</html>

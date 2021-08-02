@@ -1,0 +1,49 @@
+<!-- 
+    描述：arguments  读：奥Q门此
+    概述：用来封装函数的实参(实参都在这里面)，浏览器每次都会传递这个隐藏的参数互和this一样，
+    
+    
+    
+    function fnn() {
+        console.log(arguments[0])  //可以获取实参和长度
+        console.log(argumengs.length)  //长度
+        console.log(argumengs[1]) //也可以使用实参
+    }
+        fnn(11, 2, 2)
+
+
+
+
+arguments有一个属性callee
+概述：就是当前的函数名称
+funciton fnn(){
+    console.logg(arguments.callee)  //就是fnn
+}
+ 
+
+ -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fnn() {
+            console.log(arguments[0])
+        }
+        fnn(11, 2, 2)
+    </script>
+</body>
+
+</html>

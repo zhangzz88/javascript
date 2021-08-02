@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    #arr {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+        top: 900px;
+    }
+    
+    body {
+        width: 1000px;
+        height: 1000px;
+    }
+</style>
+
+<body>
+    <div id="arr">
+
+    </div>
+</body>
+
+<script>
+    var arr = document.getElementById('arr');
+
+
+
+    function fnn() {
+        //获取鼠标的坐标
+        var drr = window.event.clientX
+        var dee = window.event.clientY
+            //获取页面滚轮的距离
+        var eve = document.documentElement.scrollTop
+        var evr = document.documentElement.scrollLeft
+
+        arr.style.left = drr + evr + 'px'
+        arr.style.top = dee + eve + 'px'
+    }
+
+
+    document.onmousemove = function(event) {
+        fnn()
+    }
+
+    document.onwheel = function(event) {
+        fnn()
+    }
+</script>
+
+</html>

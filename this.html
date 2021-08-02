@@ -2,8 +2,14 @@
 描述：this
 概述:this默认就是存在的，只不过是隐藏了，创建对象的时候他就是存在的。
 
+总结：
+-函数直接调用，this就是window
+-方法调用时，this是调用的方法的对象
+-构造函数调用时，this是实例
+-call和apply调用时，this是指定的那个对象
 
-函数方式调用this是window
+
+函数的this是window
 function fnn(){
     console.log(this) //this是window
 }
@@ -26,7 +32,7 @@ console.log(name)
 
 
 
-方法调用this是对象
+方法的this是他对象
 function fnn(){
     console.log(this)
 }
@@ -35,6 +41,62 @@ var a={
     add:fnn
 }
 a.add(); //this是a
+
+
+
+
+
+
+
+
+
+
+
+
+修改this的方法
+
+
+描述call和apply
+function fnn() {console.log(this)}; //fnn函数的this是window
+var arr = {};
+var add = {};
+
+fnn.call(arr)  //使用call将fnn的this指向arr。
+//call（）括号中是谁this就是谁
+
+
+
+
+案例：
+funciton fnn(){
+    console.log(this.name)
+}
+var arr={name:'张三'}
+var add={name:'李四'}
+
+fnn.call(arr) //将fnn的this指向arr
+
+
+
+
+
+
+描述call和apply有什么区别?
+
+
+
+
+function fnn(a, b) {
+        console.log(a)
+        console.log(b)
+    }
+    var arr = {};
+    var add = {};
+
+    //区别在此
+    fnn.call(arr, 1, 2)  //可以给形参赋值，在后面用字符串的形式
+    fnn.apply(add,[1,2]) //可以给形参赋值，在后面用数组的形式
+
  -->
 
 
@@ -53,16 +115,36 @@ a.add(); //this是a
 
 <body>
     <script>
-        add = {
-            name: '李四',
-            getname: function() {
-                console.log(this.name)
-            }
+        function fnn(a, b) {
+            console.log(a)
+            console.log(b)
         }
-        add.call({
-            name: '张三'
-        })
-        add.getname()
+        var arr = {};
+        var add = {};
+        fnn.call(arr, 1, 2)
+
+
+
+
+
+
+
+
+
+
+
+
+        var arr = {
+            name: '张三',
+            age: 10,
+            fnn: function() {
+                console.log(this.age)
+            }
+        };
+        var add = {
+            age: 20,
+            name: '李四'
+        };
     </script>
 </body>
 

@@ -318,22 +318,33 @@ p2.name //刘备  经过深度拷贝，p2和p1已经分开了
 
 
 
-描述：string中的对象
+描述：string对象
+var str='hello';
+在底层字符串是以数组形式保存
+str=['h','e','l','l','o']
 
 var str = 'helloword';
-console.log(str.length);      //长度
-console.log(str.charAt(1));       索引为5的字符
-console.log(str.indexOf('o'))     首次出现o的索引
-console.log(str.lastIndexOf(5))   最后出现o的索引
-console.log(str.substring(5))     从5到最后的内容
-console.log(str.substring(5, 7))  从位置5到位置7的内容
-console.log(str.substr(5))        从位置5到最后的内容
-console.log(str.substr(5, 2))     从位置5到后面2个字符的内容
-console.log(str.toLowerCase())    小写
-console.log(str.toUpperCase())    大写
-console.log(str.split('l'))       从字符串l开始分割
-console.log(str.split('l', 3))     l开始分割，最多分3次
-console.log(str.replace('word', 'js'))  替换word成js
+str.length);      //长度
+str.charAt(1);       索引为5的字符
+str.charCodeAt(1)    索引为1的字符unicode编码
+result=String.fromCharCode(0x2682); 这个是将编码输出成字符串
+前面得用string对象，后面用frimcharcode方法
+
+str.indexOf('o',1)    索引1后面首次出现o的索引
+str.lastIndexOf(5，1)  索引1之前的，最后出现o的索引
+str.substring(5)     从5到最后的内容
+str.substring(5, 7)  从位置5到位置7的内容
+上面方法和slice区别是sub第二个数不能写-1
+str.substr(5)        从位置5到最后的内容
+str.substr(5, 2)     从位置5到后面2个字符的内容
+str.slice(0,2)     截取字符串，不会影响原字符，将索引0到2内容返回。可以只写一个数，返回这个数后面所有数据
+str.slice(1,-1)这个是从索引1到倒数索引是1的
+str.toLowerCase()    小写
+str.toUpperCase()    大写
+str.split('l')       从字符串l开始分割
+str.split('l', 3)     l开始分割，最多分3次
+str.replace('word', 'js')  替换word成js
+
 
 
 开发中会常用到方法
@@ -353,11 +364,11 @@ if (name.toLowerCase().indexOf('admin') != -1) {
 
 描述：number中的对象
 var a = 11232.123
-console.log(Number.MAX_VALUE) //这里是Number的构造函数，   number表示的最大数值,超过了几intfinty
-console.log(Number.MIN_VALUE) //number表示最小数值   超过了就-inifinty
-console.log(a.toFixed())       //四舍五入
-console.log(a.toFixed(1))      //保留小数点1位
-console.log(a.toFixed(6))     //保留小数点6位，不够补0
+Number.MAX_VALUE  //这里是Number的构造函数，   number表示的最大数值,超过了几intfinty
+Number.MIN_VALUE //number表示最小数值   超过了就-inifinty
+a.toFixed()       //四舍五入
+a.toFixed(1)      //保留小数点1位
+(a.toFixed(6)     //保留小数点6位，不够补0
 
 
 
@@ -365,15 +376,15 @@ console.log(a.toFixed(6))     //保留小数点6位，不够补0
 
 描述:Math的对象
 math对象  对数值进行数学运算。
-console.log(Math.PI)            //PI就是圆周率
-console.log(Math.abs(-5))       //-5的绝对值
-console.log(Math.max(1, 2, 3))  //1,2,3中最大的值
-console.log(Math.min(1, 2, 3))  //1,2,3中最小的值
-console.log(Math.pow(2, 2))     //2的2次方
-console.log(Math.sqrt(5))       //5的平方根
-console.log(Math.ceil(12.12))   //向上取整
-console.log(Math.floor(12.12))  //向下取整
-console.log(Math.round(12.12))  //四舍五入的整数值
+Math.PI)            //PI就是圆周率
+Math.abs(-5)       //-5的绝对值
+Math.max(1, 2, 3)  //1,2,3中最大的值
+Math.min(1, 2, 3)  //1,2,3中最小的值
+Math.pow(2, 2)   //2的2次方
+Math.sqrt(5)       //5的平方根
+Math.ceil(12.12)  //向上取整
+Math.floor(12.12)  //向下取整
+Math.round(12.12)  //四舍五入的整数值
 Math.random() * (100 - 1) + 1)  //随机数
 
 案例：100毫秒输出一个随机数
@@ -393,46 +404,52 @@ var aa = setInterval(fn, 100); //需要设置一个变量储存。
 
 
 
+描述：Date时间
+  //当前的标准时间，这行代码执行的时间
+        var d = new Date();
 
-描述：data对象
-//data对象
-var date = new Date(); //基于当前时间创建时间对象
-console.log(date); //当前年年、月、星期、日、小时、分钟、秒
-
-console.log(date.getFullYear()); //年
-//date.setFullYear(2019) 修改年
-
-console.log(date.getMonth() + 1) //月（0-11）      
-    // date.setMonth(4)//修改月
-
-console.log(date.getDate()) //日
-    // date.setDate(30) //修改日
-new Date(2021,1,0)//获取2021.1月的天数
-
-console.log(date.getDay()) //星期
-new Date(y, 0).getDay()//获取y年的1月1日星期数
-
-console.log(date.getHours()) //小时
-    //date.serHours(12)   //修改小时
-
-console.log(date.getMinutes()) //分钟（0-59）读： 眯尼次
-    //date.setMinutes(18)  //修改分钟
-
-console.log(date.getSeconds()) // 秒  读：塞肯思
-    //date.serSeconds(30)
-
-console.log(date.getMilliseconds()) //毫秒   mini赛肯思
-    //date.setMilliseconds()  //修改毫秒   
-
-console.log(date.getTime()) //从1970-1-1 0：0:0 距离Date对象所代表时间的毫秒数
-    //Date.setTime(10) //从1970-1-1 0：0:0 计时的毫秒数来设置时间。
+        自己设定时间：
+        var date = new Date(2019, 9, 1, 11, 53, 4); //括号中是，年月日小时分钟秒 //月是0-11比真实的少了一个月
+        var d2 = new Date("12/03/2021 11:10:30")；
 
 
 
-//自己设置时间的两种方式
-    var date = new Date(2019, 9, 1, 11, 53, 4); //括号中是，年月日小时分钟秒 //月是0-11比真实的少了一个月
-    var date2 = new Date("2001-1-11 00:00:00") //
-    document.write(date2)
+        var d3 = d2.getDate(); //多少号（日）       setDate(30) //修改日
+        var d4 = d2.getDay(); //星期   表示0-6      new Date(y, 0).getDay()//获取y年的1月1日星期数
+        var d5 = d2.getMonth(); //月份   0-11  0代表一月   s    etMonth(4)//修改月
+        var d6 = d2.getFullYear(); //年份   s       etFullYear(2019) 修改年
+        var d7 = d2.getHours() //小时               serHours(12)   //修改小时
+        var d8 = d2.getMinutes() //分钟         //setMinutes(18)修改分钟  
+        var d9 = d2.getSeconds() //秒           //serSeconds(30)修改秒  
+        var d10 = d2.getMilliseconds() //毫秒   // setMilliseconds()修改毫秒  
+
+
+        //描述：date.gettime()
+        //概述：指的是从格林威治标准时间1970年1月1日，0时0分0秒
+        //到当前时间的毫秒数
+
+        //计算机底层使用的都是时间戳（时间戳就是毫秒）
+        var d11 = d2.getTime() //d2距离格林威治的1970年 有多少毫秒
+        var d12 = Date.now() //当前时间的毫秒
+
+
+        console.log(d12)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -584,22 +601,30 @@ try {
 
 <body>
     <script>
-        function deepCopy(n) { //n就是被copy的对象
-            var o = {}; //保存成员
-            for (var i in n) { //遍历n的每一个成员
-                o[i] = n[i]; //实现复制，如果是object就递归，如果不是对象
-            }
-            return o;
-        }
+        //当前的标准时间，这行代码执行的时间
+        var d = new Date();
 
-        var p1 = [
-            name = '张飞',
-            age = 20,
-            gender = '男'
-        ];
-        var p2 = deepCopy(p1);
+        var d2 = new Date("12/03/2021 11:10:30")
+        var d3 = d2.getDate(); //多少号（日）
+        var d4 = d2.getDay(); //星期   表示0-6
+        var d5 = d2.getMonth(); //月份   0-11  0代表一月
+        var d6 = d2.getFullYear(); //年份
+        var d7 = d2.getHours() //小时 
+        var d8 = d2.getMinutes() //分钟
+        var d9 = d2.getSeconds() //秒
+        var d10 = d2.getMilliseconds() //毫秒
 
-        console.log(p1)
+
+        //描述：gettime()
+        //概述：指的是从格林威治标准时间1970年1月1日，0时0分0秒
+        //到当前时间的毫秒数
+
+        //计算机底层使用的都是时间戳（时间戳就是毫秒）
+        var d11 = d2.getTime() //d2距离格林威治的1970年 有多少毫秒
+        var d12 = Date.now() //当前时间的毫秒
+
+
+        console.log(d12)
     </script>
 </body>
 

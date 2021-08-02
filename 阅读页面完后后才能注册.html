@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    p {
+        width: 200px;
+        height: 300px;
+        overflow: auto;
+        border: 1px solid red;
+    }
+</style>
+
+<body>
+    <h2>请您仔细阅读说明</h2>
+    <p id="poe">请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明 仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明 仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明 仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明 仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明
+        仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明 仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明 仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明 仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明仔细阅读说明请您仔细阅读说明请您仔细阅读说明请您仔细阅读说明
+    </p>
+    <input type="checkbox" disabled='disabled'>
+    <button id="btn" disabled='disabled'>注册</button>
+
+
+
+
+
+    <script>
+        var p = document.getElementById('poe');
+        var input = document.getElementsByTagName('input')[0];
+        var btn = document.getElementById('btn');
+        p.onscroll = function() {
+            if (p.scrollHeight - p.scrollTop == p.clientHeight) {
+                btn.disabled = false;
+                input.disabled = false
+            }
+        }
+    </script>
+</body>
+
+</html>
