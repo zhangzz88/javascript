@@ -1,0 +1,146 @@
+<!-- 
+    描述：异步
+    说明：js执行环境是单线程（代码执行的单线程），一次执行一件事情，多个任务就需要排队，前一个完成后一个执行。
+    单线程好处，实现起来简单，执行环境单纯，坏处，前面只要有一个任务耗时很长，后面任务就
+    得排队等着，拖延整个程序的执行，浏览器无响应就是因为某个代码长时间运行循环，导致卡住。
+
+    注意单线程指不是整个js引擎只有单线程，是代码运行时1个线程，其他还有时间函数
+    的计时，ajax技术和后台的交互操作。
+
+
+    为了解决问题卡住，执行分为：同步异步
+    同步：一个一个按照顺序执行。同步执行完才执行异步
+    异步：一个一个执行的情况下，突然发现有的需要等一会或特定情况再执行，不立即执行就是异步
+        在浏览器端，耗时很长的操作都要异步
+        在服务器端，基本是唯一的模式
+
+
+
+
+
+
+    异步案例：
+    console.log('1')
+    setTimeout(function() {
+        console.log(2)
+    }, 4000)
+    console.log('end')
+    
+    注意：异步的执行顺序，步骤一先输出1，步骤二执行settimeout，（因为是异步所以settimeout分两步执行）
+    先调用settimeout方法，然后把要执行的函数放到队列中（注意这时候由专门进行计时的线程开始计时），然后继续执行下面的输出end。（这时候全部执行完）
+    回过头来时间到了的话就输出队列中的函数2.（这里异步事件和正常事件不是同步执行，但也加大了效率）
+
+
+    异步案例：settimeout并不是全部代码执行后开始计时，进入到队列时，由计时器线程已经开始计时
+    console.log("start");
+    setTimeout(function() {
+        console.log("timeout");
+    }, 5000);
+    for (let i = 0; i <= 500000; i++) {
+        console.log("i:", i);
+    }
+    console.log("end");
+
+
+
+
+
+
+
+    异步的两个方法
+    setImmediate(()=>{  //在异步执行完之后执行
+        console.log(1)
+    })
+    process.nextTick(()=>{  //在同步执行完之后立即执行，之后再执行异步
+        console.log(2)
+    })
+    
+
+
+
+
+
+
+
+
+    事件循环
+    
+
+
+
+
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        //闭包肯定是一个嵌套的，变量肯定是局部变量，因为全局变量没有访问不到的情况。
+        //为了让外部使用我这个局部变量，这就是闭包，按理说函数执行完了就释放内存了。
+        //间接访问一个变量和隐藏一个变量
+        // var add = function() {
+        //     var local = '你好';
+
+        //     function fpp() {
+        //         return local;
+
+        //     }
+        //     return fpp() //window.fpp=fpp也可以，只是为了外面访问到这个函数
+        // }
+        // var arr=add()
+        // console.log(arr())
+
+
+
+        // function fnn() {
+        //     var lives = 20;
+        //     window.add = function() { //这是一个闭包，为了让外面人使用我这个局部变量
+        //         lives += 1
+        //     }
+        //     window.arr = function() {
+        //         lives -= 1
+        //     }
+        // }
+        // fnn()
+
+        // function add() {
+        //     var a = 0;
+
+        //     function arr() {
+        //         return a
+        //     }
+        //     return arr()
+        // }
+        // //现在我想要使用a
+        // var fnn = add() //var fnn=arr(){}  因为返回的是arr
+        // console.log(fnn)
+
+
+        process.nextTick(() => { //同步代码执行完立即执行他，之后再执行异步
+            console.log(6)
+        });
+        setTimmediate(() => {
+            console.log(12)
+        })
+        console.log(1);
+        setTimeout(() => {
+            console.log(2)
+        }, 0)
+        setTimeout(() => {
+            console.log(3)
+        }, 0)
+        console.log(5)
+    </script>
+</body>
+
+</html>
